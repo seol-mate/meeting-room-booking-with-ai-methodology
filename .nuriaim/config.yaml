@@ -152,7 +152,8 @@ options:
     # 상세: 4-DN-00 「디자이너 참여 시」
 
 artifacts:
-  confirmed: []
+  confirmed:
+    - 1-PN-01-O1   # 프로젝트 개요서
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.

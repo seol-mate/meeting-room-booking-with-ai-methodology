@@ -1,3 +1,22 @@
 # 승인 기록 — 추가만 한다. 과거 사건을 고치거나 지우지 않는다.
 # 상태·사건 종류·적는 사람: 9-CM-02 「확정 모델」 / 형식: 9-CM-01 「승인 기록」
-events: []
+events:
+  - artifact: 1-PN-01-O1
+    version: "1.0"
+    event: external_confirmed
+    by: 설동혁 (PM) — 발주처 대리(9-CM-06 유형—부재), RSK-01
+    recorded_by: 설동혁 (PM)
+    at: 2026-10-22 13:31
+    channel: 해당 없음(1인 프로젝트 — 받을 사람 없음)
+    seen: "§1~§8 전체, 커밋 d81cb62"
+    said: 발주처 부재 — 제품 책임자 없는 1인 프로젝트(개인 테스트). 송부 대신 PM이 대리 확인
+    result: 확인
+    kind: PM 대리
+    proxy_basis: 유형—부재
+    risk: RSK-01
+  - artifact: 1-PN-01-O1
+    version: "1.0"
+    event: declared
+    by: 설동혁 (PM)
+    at: 2026-10-22 13:32
+    tier: baseline
