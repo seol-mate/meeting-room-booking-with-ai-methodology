@@ -20,3 +20,22 @@ events:
     by: 설동혁 (PM)
     at: 2026-10-22 13:32
     tier: baseline
+  - artifact: 2-MG-01-O1
+    version: "1.0"
+    event: external_confirmed
+    by: 설동혁 (PM) — 발주처 대리(9-CM-06 유형—부재), RSK-01
+    recorded_by: 설동혁 (PM)
+    at: 2026-10-22 13:32
+    channel: 해당 없음(1인 프로젝트 — 받을 사람 없음)
+    seen: "§1~§7 전체, 커밋 dc089ed"
+    said: 발주처 부재 — 제품 책임자 없는 1인 프로젝트(개인 테스트). PM이 대리 확인
+    result: 확인
+    kind: PM 대리
+    proxy_basis: 유형—부재
+    risk: RSK-01
+  - artifact: 2-MG-01-O1
+    version: "1.0"
+    event: declared
+    by: 설동혁 (PM)
+    at: 2026-10-22 13:33
+    tier: baseline
