@@ -143,3 +143,16 @@ events:
     at: 2026-10-27 11:56
     rule: 산출물 확정 여부·일정 확인(_agent-rules) — 4-DN 단계 시작일·종료일 확정 전 착수 금지
     reason: PM 지시 — 4-DN 단계 일정을 미정인 채 진행(WBS 2-MG-02-O1 §2 4-DN 상태 미정). 단계 일정은 이후 PM이 확정하고 WBS를 개정한다
+  - artifact: 4-DN-01-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (AA)
+    at: 2026-10-27 12:02
+  - artifact: 4-DN-01-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-27 12:03
+    tier: baseline
+    self_approval: true
+    covers: [3-AN-09-O1@1.0]
