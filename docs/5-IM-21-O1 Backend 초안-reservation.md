@@ -468,7 +468,6 @@ PATCH /api/v1/reservations/{reservationId}/cancel
 
 | HTTP | 코드 | 발생 상황 | EX-ID |
 |------|------|---------|-------|
-| 400 | BAD_REQUEST | `reservationId` 형식 오류 | — |
 | 401 | UNAUTHORIZED | 로그인하지 않음 | — |
 | 403 | FORBIDDEN | 예약자 본인도 `ROOM_MANAGER`도 아닌 사용자의 취소 요청 | `EX-RSV-11` |
 | 404 | NOT_FOUND | 없는 예약 | — |
@@ -481,6 +480,7 @@ PATCH /api/v1/reservations/{reservationId}/cancel
 - 이미 취소된 예약의 재취소를 422로 거부한다(API 명세서가 「Backend 최종 명세서(5-IM-23)에서 확정」으로 남긴 경계). 멱등하게 200으로 처리하는 대안은 취소 이력(`cancelled_at`) 덮어쓰기 문제 때문에 택하지 않았다.
 - 비교 기준 시각은 서버 `Clock`(Asia/Seoul)이다.
 - 이 operation은 예약 취소(SCR-RSV-005)와 회의실 관리 담당자의 전체 예약 조회 화면의 [취소](SCR-MTR-003)가 함께 쓴다.
+- 경로 변수 `reservationId`의 형식 오류(숫자가 아님)는 API 계약에 선언되지 않은 기반 오류이며 공통 예외 핸들러가 400으로 돌려준다.
 
 ---
 
@@ -507,7 +507,7 @@ PATCH /api/v1/reservations/{reservationId}/cancel
 
 ### 도메인 공통 구현 전제
 
-- 서비스 배치: `AccountService`(SVC-RSV-001 — reservation-001~004)와 `ReservationService`(SVC-RSV-002 — reservation-005~008)로 나눈다. 상태 변경은 서비스에서만 하고 Controller는 검증과 봉투 변환만 한다(`4-DN-21-O3` Controller·Service 규칙).
+- 서비스 배치: `AccountService`(SVC-RSV-001 — reservation-001~004)와 `ReservationService`(SVC-RSV-002 — reservation-005~008)로 나눈다. `ReservationService`는 회의실 도메인의 서비스 계약만 호출하고 그 반대 방향 의존은 없다 — 전체 예약 조회(`meeting-room-005`)는 회의실 도메인의 별도 조회 서비스가 두 서비스를 조합해 처리한다(→ meeting-room 초안 §3 참조). 서비스 사이에 순환 의존이 생기지 않게 하기 위함이다. 상태 변경은 서비스에서만 하고 Controller는 검증과 봉투 변환만 한다(`4-DN-21-O3` Controller·Service 규칙).
 - 포트 어댑터: 공통 기능이 선언한 포트 `LoginUserLookup`(현재 로그인 사용자 식별)의 구현은 `AccountService`가 맡는다. 세션의 사용자 식별자로 `ReserverRepository.findById`를 조회해 `LoginUser(reserverId, role)`를 돌려준다. 이 어댑터가 생기면 보호 경로가 열린다.
 - 로그인 세션은 공통 기능의 `LoginSession.begin`으로 시작하고 `CurrentUserProvider`로 현재 사용자를 읽는다. 역할 판정은 `LoginUser.hasRole("ROOM_MANAGER")`로 한다.
 - 예약 겹침 최종 보증은 DB 배제 제약 `ex_reservation_overlap`이고, 서비스의 확인은 사용자에게 친절한 오류를 주기 위한 1차 확인이다. 제약 위반은 공통 예외 핸들러가 409로 바꾼다.
@@ -546,3 +546,4 @@ PATCH /api/v1/reservations/{reservationId}/cancel
 | 버전 | 변경일 | 변경자 | 변경 내용 |
 |------|--------|--------|---------|
 | 1.0 | 2026-10-27 | 설동혁 (DV) | 최초 작성 |
+| 1.0.1 | 2026-10-27 | 설동혁 (DV) | 정정 — 정합성 점검(5-IM-22) 중 발견: 계약에 없는 400 행(reservation-008) 제거하고 기반 오류로 명시, 서비스 순환 의존 방지 문구 추가. 동작 변경 없음 |

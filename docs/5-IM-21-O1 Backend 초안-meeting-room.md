@@ -58,7 +58,7 @@ GET /api/v1/meeting-rooms
 
 **영속화 의도 (Persistence)**
 
-- 쿼리 방식: `[JPA]` 목록 — `MeetingRoomRepository`에서 전체 조회(`name` 오름차순, DB는 ICU `ko-KR` 정렬).
+- 쿼리 방식: `[JPA]` 목록 — `MeetingRoomRepository`에서 전체를 프로젝션 DTO로 직접 조회한다(`name` 오름차순, DB는 ICU `ko-KR` 정렬, 엔티티를 거치지 않는다 — `4-DN-21-O3` Repository 규칙).
 - 저장·상태 변경: 없음.
 
 **응답 매핑 (Response)**
@@ -180,7 +180,6 @@ GET /api/v1/meeting-rooms/{meetingRoomId}
 
 | HTTP | 코드 | 발생 상황 | EX-ID |
 |------|------|---------|-------|
-| 400 | BAD_REQUEST | `meetingRoomId` 형식 오류 | — |
 | 401 | UNAUTHORIZED | 로그인하지 않음 | — |
 | 403 | FORBIDDEN | `ROOM_MANAGER`가 아닌 사용자 | — |
 | 404 | NOT_FOUND | 없는 회의실 | — |
@@ -188,7 +187,7 @@ GET /api/v1/meeting-rooms/{meetingRoomId}
 
 **구현 가정 (Assumptions)**
 
-- 없음.
+- 경로 변수 `meetingRoomId`의 형식 오류(숫자가 아님)는 API 계약에 선언되지 않은 기반 오류이며 공통 예외 핸들러가 400으로 돌려준다.
 
 ---
 
@@ -332,7 +331,7 @@ GET /api/v1/admin/reservations
 
 ### 도메인 공통 구현 전제
 
-- 서비스 배치: `MeetingRoomService`(SVC-MTR-001) 하나에 회의실 등록·변경·조회와 전체 예약 조회(`meeting-room-005`)를 둔다. Controller는 검증과 봉투 변환만 한다.
+- 서비스 배치: SVC-MTR-001을 두 서비스로 나눈다 — `MeetingRoomService`는 회의실 등록·변경·조회(`meeting-room-001`~`004`)와 이 도메인이 제공하는 서비스 계약을 맡고 다른 도메인 서비스를 호출하지 않는다. `AdminReservationQueryService`는 전체 예약 조회(`meeting-room-005`)를 맡아 예약 도메인의 서비스 계약과 `MeetingRoomService`를 조합한다. 이렇게 나누면 `ReservationService → MeetingRoomService`(→ 예약 도메인은 회의실 계약만 호출)와 `AdminReservationQueryService → ReservationService`가 한 방향이라 서비스 사이에 순환 의존이 생기지 않는다(패키지 단위로는 두 도메인이 서로 참조하지만 단일 모듈이고 경계 규칙이 없다). Controller는 검증과 봉투 변환만 한다.
 - 역할 판정은 공통 기능의 `CurrentUserProvider`로 현재 사용자를 얻어 `LoginUser.hasRole("ROOM_MANAGER")`로 한다. `ROOM_MANAGER`가 필요한 operation은 서비스 진입에서 확인하고 아니면 `BusinessException(FORBIDDEN)`을 던진다.
 - 도메인 간 호출은 서비스 계층에서만 한다. 예약 도메인의 Repository·엔티티를 직접 다루지 않는다(`4-DN-21-O3` Service 규칙). 엔티티 간 연관관계(`MeetingRoomEntity.reservations`)는 사용하지 않는다(목록 조회 시 지연 로딩으로 전체 예약이 끌려오지 않게 한다).
 - 회의실 삭제가 없으므로 예약이 있는 회의실을 지우는 경우는 없다.
@@ -363,3 +362,4 @@ GET /api/v1/admin/reservations
 | 버전 | 변경일 | 변경자 | 변경 내용 |
 |------|--------|--------|---------|
 | 1.0 | 2026-10-27 | 설동혁 (DV) | 최초 작성 |
+| 1.0.1 | 2026-10-27 | 설동혁 (DV) | 정정 — 정합성 점검(5-IM-22) 중 발견: 목록 조회를 프로젝션 DTO로 명시, 계약에 없는 400 행(meeting-room-003) 제거하고 기반 오류로 명시, 서비스 순환 의존을 막도록 전체 예약 조회를 별도 서비스로 분리. 동작 변경 없음 |
