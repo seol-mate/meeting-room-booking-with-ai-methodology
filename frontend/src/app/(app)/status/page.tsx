@@ -1,109 +1,170 @@
-import { AppShell } from "@/components/app-shell";
-import { ScreenState } from "@/components/screen-state";
+"use client";
+
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
+import { StateEmpty, StateError, StateLoading } from "@/components/screen-state";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRooms } from "@/hooks/use-meeting-rooms";
+import { useReservationStatus } from "@/hooks/use-reservations";
 import { t } from "@/lib/messages";
-import { halfHours, toMinutes } from "@/lib/time";
-import {
-  canSeeTitle,
-  currentUser,
-  reservations,
-  rooms,
-  sampleDate,
-} from "@/mock/data";
+import { halfHours, splitLocalDateTime, todayString } from "@/lib/time";
+import type { ReservationStatusItem } from "@/mock/api";
 
-const slots = halfHours(9, 18);
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
-export default function StatusPage() {
-  const rows = reservations.filter(
-    (r) => r.date === sampleDate && r.status === "RESERVED",
-  );
+/** 표에 보일 시간 범위 — 기본 09:00~18:00이고, 그 밖의 예약이 있으면 넓힌다 */
+function hourRange(items: ReservationStatusItem[], date: string): [number, number] {
+  let from = 9;
+  let to = 18;
+  for (const item of items) {
+    const start = splitLocalDateTime(item.startAt);
+    const end = splitLocalDateTime(item.endAt);
+    from = Math.min(from, Number(start.time.slice(0, 2)));
+    const endHour = end.date === date ? Math.ceil(Number(end.time.slice(0, 2)) + Number(end.time.slice(3)) / 60) : 24;
+    to = Math.max(to, endHour);
+  }
+  return [from, to];
+}
+
+function StatusView() {
+  const router = useRouter();
+  const params = useSearchParams();
+  const [today] = useState(() => todayString());
+  const requested = params.get("date");
+  const date = requested && DATE_PATTERN.test(requested) ? requested : today;
+
+  const rooms = useRooms();
+  const status = useReservationStatus(date);
+
+  if (rooms.isPending || status.isPending) return <StateLoading />;
+  if (rooms.isError || status.isError) {
+    return (
+      <StateError
+        message={t("rsv.status.list.failed")}
+        onRetry={() => {
+          void rooms.refetch();
+          void status.refetch();
+        }}
+      />
+    );
+  }
+
+  const items = status.data;
+  const [fromHour, toHour] = hourRange(items, date);
+  const slots = halfHours(fromHour, toHour);
+
+  const itemAt = (meetingRoomId: number, slot: string) =>
+    items.find((i) => i.meetingRoomId === meetingRoomId && i.startAt <= `${date}T${slot}` && `${date}T${slot}` < i.endAt);
+  const label = (item: ReservationStatusItem) => `${item.reserverName}${item.title ? ` · ${item.title}` : ""}`;
 
   return (
-    <AppShell title="예약 현황">
-      <ScreenState emptyMessage={t("rsv.status.room.empty")}>
-        <div className="mb-4 flex items-end gap-3">
+    <>
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <form
+          className="flex items-end gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <div className="space-y-1.5">
             <Label htmlFor="date">날짜</Label>
-            <Input id="date" type="date" defaultValue={sampleDate} />
+            <Input
+              id="date"
+              type="date"
+              value={date}
+              onChange={(e) => e.target.value && router.replace(`/status?date=${e.target.value}`)}
+            />
           </div>
-        </div>
+          <Button type="submit" variant="outline">
+            조회
+          </Button>
+        </form>
+        <Link href="/reservations/new" className={buttonVariants()}>
+          예약하기
+        </Link>
+      </div>
 
-        {/* 데스크톱·태블릿: 회의실 × 30분 시간표 */}
-        <div className="hidden overflow-x-auto md:block">
-          <table className="w-full min-w-[40rem] border-collapse text-sm">
-            <thead>
-              <tr>
-                <th scope="col" className="w-20 border-b p-2 text-left">
-                  시간
-                </th>
-                {rooms.map((room) => (
-                  <th key={room.meetingRoomId} scope="col" className="border-b p-2 text-left">
-                    {room.name}
+      {rooms.data.length === 0 ? (
+        <StateEmpty message={t("rsv.status.room.empty")} />
+      ) : (
+        <>
+          {/* 데스크톱·태블릿: 회의실 × 30분 시간표 */}
+          <div className="hidden overflow-x-auto md:block">
+            <table className="w-full min-w-[40rem] table-fixed border-collapse text-sm">
+              <caption className="sr-only">{date} 예약 현황</caption>
+              <thead>
+                <tr>
+                  <th scope="col" className="w-20 border-b p-2 text-left">
+                    시간
                   </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {slots.map((slot) => (
-                <tr key={slot}>
-                  <th scope="row" className="border-b p-2 text-left font-normal text-muted-foreground">
-                    {slot}
-                  </th>
-                  {rooms.map((room) => {
-                    const hit = rows.find(
-                      (r) =>
-                        r.meetingRoomId === room.meetingRoomId &&
-                        toMinutes(r.start) <= toMinutes(slot) &&
-                        toMinutes(slot) < toMinutes(r.end),
-                    );
-                    return (
-                      <td
-                        key={room.meetingRoomId}
-                        className={
-                          hit
-                            ? "border-b bg-primary/10 p-2"
-                            : "border-b p-2 text-muted-foreground"
-                        }
-                      >
-                        {hit
-                          ? canSeeTitle(hit, currentUser)
-                            ? `예약됨 · ${hit.title}`
-                            : "예약됨"
-                          : "비어 있음"}
-                      </td>
-                    );
-                  })}
+                  {rooms.data.map((room) => (
+                    <th key={room.meetingRoomId} scope="col" className="border-b p-2 text-left">
+                      {room.name}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {slots.map((slot) => (
+                  <tr key={slot}>
+                    <th scope="row" className="border-b p-2 text-left font-normal text-muted-foreground">
+                      {slot}
+                    </th>
+                    {rooms.data.map((room) => {
+                      const hit = itemAt(room.meetingRoomId, slot);
+                      return (
+                        <td
+                          key={room.meetingRoomId}
+                          className={hit ? "border-b bg-primary/10 p-2" : "border-b p-2 text-muted-foreground"}
+                        >
+                          {hit ? (hit.startAt === `${date}T${slot}` ? `예약됨 · ${label(hit)}` : "예약됨") : "비어 있음"}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        {/* 모바일: 회의실별 예약 목록 */}
-        <div className="space-y-4 md:hidden">
-          {rooms.map((room) => {
-            const list = rows.filter((r) => r.meetingRoomId === room.meetingRoomId);
-            return (
-              <section key={room.meetingRoomId} className="rounded-lg border p-3">
-                <h2 className="mb-2 font-bold">{room.name}</h2>
-                {list.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">예약이 없습니다</p>
-                ) : (
-                  <ul className="space-y-1 text-sm">
-                    {list.map((r) => (
-                      <li key={r.reservationId}>
-                        {r.start}~{r.end}
-                        {canSeeTitle(r, currentUser) ? ` · ${r.title}` : " · 예약됨"}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            );
-          })}
-        </div>
-      </ScreenState>
-    </AppShell>
+          {/* 모바일: 회의실별 예약 목록 */}
+          <div className="space-y-4 md:hidden">
+            {rooms.data.map((room) => {
+              const list = items.filter((i) => i.meetingRoomId === room.meetingRoomId);
+              return (
+                <section key={room.meetingRoomId} className="rounded-lg border p-3">
+                  <h2 className="mb-2 font-bold">{room.name}</h2>
+                  {list.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">예약이 없습니다</p>
+                  ) : (
+                    <ul className="space-y-1 text-sm">
+                      {list.map((i) => (
+                        <li key={i.reservationId}>
+                          {splitLocalDateTime(i.startAt).time}~{splitLocalDateTime(i.endAt).time} · {label(i)}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+export default function StatusPage() {
+  return (
+    <>
+      <h1 className="mb-6 text-2xl font-bold">예약 현황</h1>
+      <Suspense fallback={<StateLoading />}>
+        <StatusView />
+      </Suspense>
+    </>
   );
 }
