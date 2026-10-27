@@ -16,6 +16,27 @@ spring:
 
 server:
   port: ${SERVER_PORT:8081}
+  servlet:
+    session:
+      # 세션 만료 시간은 미확정(UI&UX 제약사항 조건 C3) — 확정되면 이 값을 바꾼다
+      timeout: 30m
+      cookie:
+        http-only: true
+        same-site: lax
+
+app:
+  security:
+    # 로그인 없이 접근을 허용하는 경로. 로그인·계정 가입 경로는 API 명세서(5-IM-12) 확정 후 추가한다
+    public-paths:
+      - /actuator/health
+  cors:
+    allowed-origins:
+      - ${FRONTEND_ORIGIN:http://localhost:3000}
+
+logging:
+  pattern:
+    # [레벨] [requestId] [클래스명.메서드명] 메시지 — 공통 개발규칙(4-DN-21-O3) §5
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%-5level] [%X{requestId:-}] [%logger{0}.%M] %msg%n"
 
 management:
   endpoints:
