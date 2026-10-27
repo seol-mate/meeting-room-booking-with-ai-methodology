@@ -51,3 +51,9 @@ events:
     at: 2026-10-27 10:14
     rule: 산출물 확정 여부·일정 확인(_agent-rules) — 3-AN 단계 시작일·종료일 확정 전 착수 금지
     reason: PM 지시 — 3-AN 단계 일정을 미정인 채 진행(WBS 2-MG-02-O1 §2 3-AN 상태 미정). 단계 일정은 이후 PM이 확정하고 WBS를 개정한다
+  - artifact: 3-AN-01-O1
+    version: "1.0"
+    event: declared
+    by: 설동혁 (BA)
+    at: 2026-10-27 10:31
+    tier: interim
