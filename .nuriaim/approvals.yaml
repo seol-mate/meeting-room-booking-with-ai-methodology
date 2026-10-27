@@ -334,3 +334,29 @@ events:
     tier: build
     self_approval: true
     note: "커밋 85b422d — typecheck·lint·build·test:coverage 통과, dev 서버 3000 응답 확인. 패키지 매니저는 npm(pnpm 미설치)"
+  - artifact: 4-DN-38-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 14:20
+  - artifact: 4-DN-38-O1
+    version: "1.0"
+    event: external_confirmed
+    by: 설동혁 (PM) — 발주처 대리(9-CM-06 유형—부재), RSK-01
+    recorded_by: 설동혁 (PM)
+    at: 2026-10-27 14:21
+    channel: 해당 없음(1인 프로젝트 — 받을 사람 없음)
+    seen: "전체 화면 시안 8개 화면(frontend/src/app), 커밋 c2079a9"
+    said: 발주처 부재 — 제품 책임자 없는 1인 프로젝트(개인 테스트). 표시용 고정 데이터·동작 없음은 PM이 알고 있음
+    result: 확인
+    kind: PM 대리
+    proxy_basis: 유형—부재
+    risk: RSK-01
+  - artifact: 4-DN-38-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 14:22
+    tier: design
+    self_approval: true
+    note: "확정 시점 커밋 c2079a9. 유형안 승인은 확장 뒤 사후 승인(확인서 §2)"
