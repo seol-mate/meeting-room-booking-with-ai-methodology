@@ -309,3 +309,15 @@ events:
         owner: 설동혁 (PM)
         due: 5-IM-13 착수 전
         blocks_downstream: false
+  - artifact: 4-DN-33-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (PL)
+    at: 2026-10-27 13:45
+  - artifact: 4-DN-33-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-27 13:46
+    tier: design
+    self_approval: true
