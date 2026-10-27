@@ -41,7 +41,7 @@ export default function RoomsPage() {
             </TableHeader>
             <TableBody>
               {rooms.data.map((room) => (
-                <TableRow key={room.meetingRoomId}>
+                <TableRow key={room.meetingRoomId} data-testid={`room-row-${room.meetingRoomId}`}>
                   <TableCell>{room.name}</TableCell>
                   <TableCell>{room.location ?? "-"}</TableCell>
                   <TableCell>{room.capacity ? `${room.capacity}명` : "-"}</TableCell>
@@ -49,6 +49,7 @@ export default function RoomsPage() {
                   <TableCell className="text-right">
                     <Link
                       href={`/admin/rooms/edit?id=${room.meetingRoomId}`}
+                      data-testid={`edit-${room.meetingRoomId}`}
                       className={buttonVariants({ variant: "outline", size: "sm" })}
                     >
                       수정

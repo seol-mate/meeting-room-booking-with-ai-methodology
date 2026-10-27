@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
     // 페이지가 전부 클라이언트 컴포넌트(AuthGate 뒤)라 `instant = false`를 둘 수 없다. 명시한 구간만 검증한다
     instantInsights: { validationLevel: "manual-warning" },
   },
+  // 브라우저는 같은 출처로 /api/* 를 부르고, 개발 서버가 백엔드로 넘긴다
+  async rewrites() {
+    return [{ source: "/api/:path*", destination: `${process.env.API_PROXY_TARGET ?? "http://localhost:8081"}/api/:path*` }];
+  },
   turbopack: {
     // 파일 패턴별 로더 지정
     rules: {

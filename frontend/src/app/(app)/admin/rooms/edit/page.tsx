@@ -13,7 +13,7 @@ import { useCreateRoom, useRoom, useUpdateRoom } from "@/hooks/use-meeting-rooms
 import { isApiError } from "@/lib/api-error";
 import { t } from "@/lib/messages";
 import { fieldErrors, roomFormSchema } from "@/lib/schemas";
-import type { MeetingRoom } from "@/mock/data";
+import type { MeetingRoom } from "@/types/domain";
 import { useToastStore } from "@/store/toast-store";
 
 function RoomEditForm({ room }: { room: MeetingRoom | null }) {
@@ -64,7 +64,7 @@ function RoomEditForm({ room }: { room: MeetingRoom | null }) {
   return (
     <form className="max-w-lg space-y-4" onSubmit={onSubmit} noValidate>
       {failure && (
-        <Alert variant="destructive">
+        <Alert variant="destructive" data-testid="form-error">
           <AlertDescription>{failure}</AlertDescription>
         </Alert>
       )}
@@ -72,6 +72,7 @@ function RoomEditForm({ room }: { room: MeetingRoom | null }) {
         <Label htmlFor="name">회의실명</Label>
         <Input
           id="name"
+          data-testid="field-name"
           name="name"
           value={values.name}
           maxLength={100}
@@ -85,6 +86,7 @@ function RoomEditForm({ room }: { room: MeetingRoom | null }) {
         <Label htmlFor="location">위치</Label>
         <Input
           id="location"
+          data-testid="field-location"
           name="location"
           value={values.location}
           maxLength={200}
@@ -96,6 +98,7 @@ function RoomEditForm({ room }: { room: MeetingRoom | null }) {
         <Label htmlFor="capacity">수용 인원</Label>
         <Input
           id="capacity"
+          data-testid="field-capacity"
           name="capacity"
           type="number"
           min={1}
@@ -109,6 +112,7 @@ function RoomEditForm({ room }: { room: MeetingRoom | null }) {
         <Label htmlFor="equipment">비치 장비</Label>
         <Input
           id="equipment"
+          data-testid="field-equipment"
           name="equipment"
           value={values.equipment}
           maxLength={500}
@@ -117,7 +121,7 @@ function RoomEditForm({ room }: { room: MeetingRoom | null }) {
         <FieldError message={errors.equipment} />
       </div>
       <div className="flex gap-2">
-        <Button type="submit" size="lg" disabled={pending}>
+        <Button type="submit" size="lg" data-testid="submit-button" disabled={pending}>
           저장
         </Button>
         <Link href="/admin/rooms" className={buttonVariants({ variant: "outline", size: "lg" })}>

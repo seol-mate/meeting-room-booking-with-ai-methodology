@@ -1,10 +1,11 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import * as api from "@/mock/api";
+import * as api from "@/api/meeting-room";
+import type { RoomInput } from "@/types/domain";
 
 export function useRooms() {
-  return useQuery({ queryKey: ["rooms"], queryFn: api.listRooms });
+  return useQuery({ queryKey: ["rooms"], queryFn: () => api.listRooms() });
 }
 
 export function useRoom(meetingRoomId: number | null) {
@@ -28,13 +29,13 @@ function useInvalidateRooms() {
 
 export function useCreateRoom() {
   const invalidate = useInvalidateRooms();
-  return useMutation({ mutationFn: api.createRoom, onSuccess: invalidate });
+  return useMutation({ mutationFn: (input: RoomInput) => api.createRoom(input), onSuccess: invalidate });
 }
 
 export function useUpdateRoom() {
   const invalidate = useInvalidateRooms();
   return useMutation({
-    mutationFn: (vars: { meetingRoomId: number; input: api.RoomInput }) =>
+    mutationFn: (vars: { meetingRoomId: number; input: RoomInput }) =>
       api.updateRoom(vars.meetingRoomId, vars.input),
     onSuccess: invalidate,
   });

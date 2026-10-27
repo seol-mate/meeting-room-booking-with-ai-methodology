@@ -1,0 +1,139 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.5 C:/dev/meeting-room-booking/frontend
+
+ ✓ src/lib/schemas.test.ts > loginSchema > 로그인 ID와 비밀번호가 비면 각각의 안내 문구를 돌려준다 34ms
+ ✓ src/lib/schemas.test.ts > signupSchema > 세 항목이 모두 필수다 8ms
+ ✓ src/lib/schemas.test.ts > reservationFormSchema > 30분 단위로 30분~4시간이면 통과한다 13ms
+ ✓ src/lib/schemas.test.ts > reservationFormSchema > 4시간을 넘거나 종료가 시작보다 이르면 시간 안내 문구로 실패한다 11ms
+ ✓ src/lib/schemas.test.ts > reservationFormSchema > 회의실을 고르지 않으면 실패한다 1ms
+ ✓ src/lib/schemas.test.ts > roomFormSchema > 회의실명만 있어도 통과한다(위치·수용 인원·장비는 선택) 7ms
+ ✓ src/lib/schemas.test.ts > roomFormSchema > 회의실명이 비면 안내 문구로 실패한다 7ms
+ ✓ src/lib/schemas.test.ts > roomFormSchema > 수용 인원은 양의 정수만 받는다 1ms
+ ✓ src/lib/schemas.test.ts > periodSchema > 시작일이 종료일보다 늦으면 기간 안내 문구로 실패한다 8ms
+ ✓ src/lib/schemas.test.ts > periodSchema > 같은 날은 허용한다 6ms
+ ✓ src/api/api.test.ts > API 계층 — 요청 형식 > 로그인은 POST api/v1/auth/login으로 본문을 보내고 앞에 슬래시를 붙이지 않는다 52ms
+ ✓ src/api/api.test.ts > API 계층 — 요청 형식 > 예약 현황은 쿼리 date·meetingRoomId로 호출하고 초를 뗀 로컬 일시로 바꾼다 9ms
+ ✓ src/api/api.test.ts > API 계층 — 요청 형식 > 예약 등록은 POST api/v1/reservations로 보내고 예약자를 보내지 않는다 5ms
+ ✓ src/api/api.test.ts > API 계층 — 요청 형식 > 예약 취소는 PATCH api/v1/reservations/{id}/cancel을 호출한다 4ms
+ ✓ src/api/api.test.ts > API 계층 — 요청 형식 > 회의실 변경은 PUT api/v1/meeting-rooms/{id}로 전체 항목을 보낸다 5ms
+ ✓ src/api/api.test.ts > API 계층 — 요청 형식 > 전체 예약 조회는 쿼리 from·to를 보내고 회의실 전체면 meetingRoomId를 생략한다 4ms
+ ✓ src/api/api.test.ts > API 계층 — 응답과 오류 > 오류 봉투는 상태 코드·오류 코드·메시지를 가진 ApiError로 바뀐다 34ms
+ ✓ src/api/api.test.ts > API 계층 — 응답과 오류 > 검증 오류 항목(error.errors)을 ApiError에 담는다 10ms
+ ✓ src/api/api.test.ts > API 계층 — 응답과 오류 > 서버에 닿지 못하면 상태 0의 ApiError가 된다 7ms
+ ✓ src/api/api.test.ts > API 계층 — 응답과 오류 > 응답이 명세의 형태가 아니면 오류로 알린다 8ms
+ ✓ src/app/(app)/admin/rooms/page.test.tsx > SCR-MTR-001 회의실 목록 > 조회하는 동안 로딩 상태를 보인다 850ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 로그인 없이 가입 폼이 바로 보인다 335ms
+ ✓ src/lib/time.test.ts > 예약 시간 규칙 > isValidReservationPeriod(2026-11-02T09:00, 2026-11-02T09:30) = true 3ms
+ ✓ src/lib/time.test.ts > 예약 시간 규칙 > isValidReservationPeriod(2026-11-02T09:00, 2026-11-02T13:00) = true 0ms
+ ✓ src/lib/time.test.ts > 예약 시간 규칙 > isValidReservationPeriod(2026-11-02T09:00, 2026-11-02T13:30) = false 0ms
+ ✓ src/lib/time.test.ts > 예약 시간 규칙 > isValidReservationPeriod(2026-11-02T09:00, 2026-11-02T09:00) = false 0ms
+ ✓ src/lib/time.test.ts > 예약 시간 규칙 > isValidReservationPeriod(2026-11-02T10:00, 2026-11-02T09:30) = false 0ms
+ ✓ src/lib/time.test.ts > 예약 시간 규칙 > isValidReservationPeriod(2026-11-02T09:10, 2026-11-02T10:00) = false 0ms
+ ✓ src/lib/time.test.ts > 날짜·시각 도구 > halfHours는 시작 포함·끝 미포함으로 30분 단위를 만든다 1ms
+ ✓ src/lib/time.test.ts > 날짜·시각 도구 > addDays는 월·연 경계를 넘는다 1ms
+ ✓ src/lib/time.test.ts > 날짜·시각 도구 > minutesBetween은 날짜가 달라도 분 차이를 구한다 0ms
+ ✓ src/lib/time.test.ts > 날짜·시각 도구 > formatRange는 같은 날이면 종료 시각만 붙인다 0ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 이름·비밀번호 입력이 폼에 반영되고 비밀번호는 마스킹된다 140ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 변경 대상을 불러오는 동안 로딩 상태를 보인다 927ms
+ ✓ src/app/(app)/admin/rooms/page.test.tsx > SCR-MTR-001 회의실 목록 > 마운트 시 회의실 목록을 조회해 위치·수용 인원·장비를 보인다 263ms
+ ✓ src/store/app-store.test.ts > app-store (골격 테스트) > navOpen 기본값은 false이고 setNavOpen으로 바뀐다 4ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 주소에 id가 있으면 대상 회의실을 조회해 폼에 채우고 없으면 신규 폼이다 276ms
+ ✓ src/app/(app)/admin/rooms/page.test.tsx > SCR-MTR-001 회의실 목록 > [신규 등록]은 등록 화면으로 연결된다 365ms
+ ✓ src/app/(app)/admin/rooms/page.test.tsx > SCR-MTR-001 회의실 목록 > 행별 [수정]은 대상 식별자를 주소로 넘겨 변경 화면으로 연결된다 94ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 로그인 ID 입력을 마치면 사용 가능 여부를 확인하고 사용 중이면 안내한다 240ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 로그인 ID가 비면 필수 안내를 보이고 호출하지 않는다 187ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > id가 없으면 빈 신규 폼을 보이고 조회하지 않는다 72ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 이름이 비면 필수 안내를 보인다 120ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 비밀번호가 비면 필수 안내를 보인다 91ms
+ ✓ src/app/(app)/admin/rooms/page.test.tsx > SCR-MTR-001 회의실 목록 > 회의실이 없으면 빈 안내와 [신규 등록]을 보인다 130ms
+ ✓ src/app/(app)/admin/rooms/page.test.tsx > SCR-MTR-001 회의실 목록 > 조회에 실패하면 오류 화면과 다시 시도를 보인다 155ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 로그인 상태를 확인하는 동안 로딩 상태를 보인다 1001ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 네 항목의 입력이 폼에 반영된다 183ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 조회하는 동안 로딩 상태를 보인다 961ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 회의실 목록을 불러오는 동안 로딩 상태를 보인다 905ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 회의실명이 비어 있으면 안내를 보이고 호출하지 않는다 167ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 길이 상한은 입력 길이 제한으로 막는다 81ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 이미 로그인한 사용자는 예약 현황으로 이동한다 118ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 가입에 성공하면 로그인 화면으로 이동한다 211ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 마운트 시 회의실 선택 목록을 조회해 선택지로 보인다 419ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 수용 인원은 숫자 입력이고 정수가 아니면 저장하지 않는다 153ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 주소의 날짜로 회의실 목록과 예약 현황을 조회한다 74ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 회의실이 하나도 없으면 폼 대신 안내를 보인다 74ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 가입 응답이 중복(409)이면 로그인 ID 필드에 안내한다 209ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 입력값이 폼에 반영되고 비밀번호는 마스킹된다 340ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 신규 저장은 등록 API를 호출하고 성공하면 토스트 후 목록으로 이동한다 147ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 날짜를 바꾸면 주소의 date를 바꿔 다시 조회하게 한다 422ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 가입에 실패하면 폼 위에 안내한다 120ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 로그인 ID가 비면 안내 문구를 보이고 호출하지 않는다 166ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 변경 저장은 변경 API를 호출한다 126ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 예약된 칸에 예약자와 제목을 보이고 제목이 없으면 예약됨만 보인다 141ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 서버가 입력 오류(400)를 알리면 회의실명 아래에 안내한다 123ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 비밀번호가 비면 안내 문구를 보이고 호출하지 않는다 130ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 예약이 없는 날짜는 모든 칸을 비어 있음으로 보인다 171ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 시작·종료 선택지는 00:00부터 23:30까지 30분 단위이고 입력이 폼에 반영된다 396ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 저장에 실패하면 폼 위에 안내한다 121ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 검증을 통과하면 로그인 API를 호출하고 성공하면 예약 현황으로 이동한다 148ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 회의실을 고르지 않으면 [예약]이 비활성이다 105ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 회의실이 하나도 없으면 빈 안내를 보인다 66ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 로그인 정보가 틀리면 폼 위에 안내하고 입력을 유지한다 123ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 로그인이 필요해서 이동해 온 경우 안내를 보인다 60ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 변경 대상이 없으면(404) 오류 화면을 보인다 136ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > 처리 중에는 [저장]이 비활성이다 79ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > 조회에 실패하면 오류 안내와 다시 시도를 보인다 154ms
+ ✓ src/app/(app)/admin/rooms/edit/page.test.tsx > SCR-MTR-002 회의실 등록·변경 > [취소]는 목록 화면으로 연결된다 73ms
+ ✓ src/app/(app)/status/page.test.tsx > SCR-RSV-003 예약 현황 조회 > [예약하기]는 예약 화면으로 연결된다 124ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > 처리 중에는 [가입]이 비활성이다 121ms
+ ✓ src/app/(auth)/join/page.test.tsx > SCR-RSV-002 계정 가입 > [로그인으로 돌아가기]는 로그인 화면으로 연결된다 546ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 서버 오류도 폼 위 안내로 보인다 108ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 예약 현황은 미로그인이면 로그인 화면으로 보내고 본문을 그리지 않는다 234ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > 처리 중에는 [로그인]이 비활성이다 85ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 회의실 예약은 미로그인이면 로그인 화면으로 보낸다 119ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 내 예약은 미로그인이면 로그인 화면으로 보내고 목록을 요청하지 않는다 88ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 로그인 > [계정 가입]은 가입 화면으로 연결된다 119ms
+ ✓ src/app/(auth)/login/page.test.tsx > SCR-RSV-001 비기능 — 로그인 가드 > 로그인 상태가 아니면 로그인 폼을 그대로 보인다 81ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 종료가 시작보다 늦지 않으면 시간 규칙 안내를 보이고 호출하지 않는다 322ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 회의실 목록은 미로그인이면 로그인 화면으로, 일반 사용자에게는 권한 거부 화면을 보인다 105ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 회의실 목록은 일반 사용자에게 권한 거부 화면을 보인다 133ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 회의실 등록·변경은 미로그인이면 로그인 화면으로 보낸다 75ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 조회하는 동안 로딩 상태를 보인다 618ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 조회하는 동안 로딩 상태를 보인다 687ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 4시간을 넘는 예약은 시간 규칙 안내를 보인다 293ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 회의실 등록·변경은 일반 사용자에게 권한 거부 화면을 보인다 36ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 전체 예약 조회는 미로그인이면 로그인 화면으로 보낸다 87ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 마운트 시 내 예약 목록을 조회한다 129ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 시작이 지난 예약은 [취소]가 비활성이고 취소한 예약은 상태와 취소 일시를 보인다 83ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 기본 조건(오늘부터 7일, 전체 회의실)으로 조회하고 조건용 회의실 목록을 불러온다 113ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 전체 예약 조회는 일반 사용자에게 권한 거부 화면을 보이고 조회하지 않는다 38ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 검증을 통과하면 예약 API를 본인 명의 없이 호출한다 209ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 예약 내역이 없으면 빈 안내를 보인다 90ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > [조회]를 누르면 조건을 주소에 반영한다 203ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 시작일이 종료일보다 늦으면 기간 안내를 보이고 조건을 반영하지 않는다 116ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 시작 이후 예약의 [취소]는 비활성이다 76ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 목록 조회에 실패하면 오류 화면과 다시 시도를 보인다 111ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 예약에 성공하면 토스트를 보이고 내 예약 화면으로 이동한다 261ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 조회 기간에 예약이 없으면 빈 안내를 보인다 72ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > [취소]를 누르면 확인 대화상자를 먼저 보이고 호출하지 않는다 245ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 회의실 관리 담당자는 관리 화면에 들어갈 수 있다 546ms
+ ✓ src/components/layout/guards.test.tsx > 로그인 가드(AuthGate) — 로그인 후 화면 진입 > 일반 사용자에게는 관리 메뉴를 보이지 않는다 80ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 겹침(409)이면 종료 시각 아래에 이미 예약됨을 안내한다 228ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 조회에 실패하면 오류 안내와 다시 시도를 보인다 161ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 대화상자를 확인하면 취소 API를 호출하고 토스트를 보이며 목록을 다시 불러온다 223ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 서버가 시간 규칙 위반(422)을 알리면 같은 자리에 안내한다 239ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > [취소]를 누르면 확인 대화상자를 먼저 보이고 호출하지 않는다 238ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 시작 이후 취소가 거부(422)되면 목록 위에 안내한다 220ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 저장에 실패하면 폼 위에 안내한다 232ms
+ ✓ src/app/(app)/my-reservations/page.test.tsx > SCR-RSV-005 내 예약 > 취소에 실패하면 목록 위에 안내한다 179ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 확인하면 취소 API를 호출하고 토스트를 보이며 목록을 다시 불러온다 246ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > 처리 중에는 [예약]이 비활성이다 168ms
+ ✓ src/app/(app)/reservations/new/page.test.tsx > SCR-RSV-004 회의실 예약 > [취소]는 예약 현황으로 연결된다 106ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 시작 이후 취소가 거부(422)되면 목록 위에 안내한다 190ms
+ ✓ src/app/(app)/admin/reservations/page.test.tsx > SCR-MTR-003 전체 예약 조회 > 주소의 조건(from·to·room)으로 조회한다 23ms
+
+ Test Files  13 passed (13)
+      Tests  127 passed (127)
+   Start at  17:28:37
+   Duration  11.05s (environment 31%, import 27%, tests 22%, setup 18%, transform 2%)
+

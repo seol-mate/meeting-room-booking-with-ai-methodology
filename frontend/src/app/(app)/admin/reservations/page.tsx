@@ -56,6 +56,7 @@ function FilterForm({
           <Label htmlFor="from">시작일</Label>
           <Input
             id="from"
+            data-testid="field-from"
             name="from"
             type="date"
             value={draft.from}
@@ -66,6 +67,7 @@ function FilterForm({
           <Label htmlFor="to">종료일</Label>
           <Input
             id="to"
+            data-testid="field-to"
             name="to"
             type="date"
             value={draft.to}
@@ -78,6 +80,7 @@ function FilterForm({
           <Label htmlFor="room">회의실</Label>
           <NativeSelect
             id="room"
+            data-testid="field-room"
             name="room"
             value={draft.roomId}
             onChange={(e) => setDraft({ ...draft, roomId: e.target.value })}
@@ -90,7 +93,9 @@ function FilterForm({
             ))}
           </NativeSelect>
         </div>
-        <Button type="submit">조회</Button>
+        <Button type="submit" data-testid="submit-button">
+          조회
+        </Button>
       </div>
       <FieldError id="period-error" message={error} />
     </form>
@@ -138,7 +143,7 @@ function AdminReservationsView() {
         }
       />
       {notice && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert variant="destructive" className="mb-4" data-testid="form-error">
           <AlertDescription>{notice}</AlertDescription>
         </Alert>
       )}
@@ -162,7 +167,7 @@ function AdminReservationsView() {
             </TableHeader>
             <TableBody>
               {list.data.map((item) => (
-                <TableRow key={item.reservationId}>
+                <TableRow key={item.reservationId} data-testid={`row-${item.reservationId}`}>
                   <TableCell>{item.meetingRoomName}</TableCell>
                   <TableCell>{formatRange(item.startAt, item.endAt)}</TableCell>
                   <TableCell>{item.reserverName}</TableCell>
@@ -172,6 +177,7 @@ function AdminReservationsView() {
                       type="button"
                       variant="destructive"
                       size="sm"
+                      data-testid={`cancel-${item.reservationId}`}
                       disabled={item.startAt <= now}
                       onClick={() => setTarget(item.reservationId)}
                     >

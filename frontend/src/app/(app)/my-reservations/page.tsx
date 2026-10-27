@@ -12,7 +12,7 @@ import { useCancelReservation, useMyReservations } from "@/hooks/use-reservation
 import { isApiError } from "@/lib/api-error";
 import { t } from "@/lib/messages";
 import { formatDateTime, formatRange } from "@/lib/time";
-import type { MyReservationItem } from "@/mock/api";
+import type { MyReservationItem } from "@/types/domain";
 import { useToastStore } from "@/store/toast-store";
 
 export default function MyReservationsPage() {
@@ -28,18 +28,20 @@ export default function MyReservationsPage() {
     setNotice(null);
     cancel.mutate(target, {
       onSuccess: () => pushToast(t("rsv.my.cancel.success")),
-      onError: (error) => setNotice(isApiError(error) ? error.message : t("rsv.my.cancel.failed")),
+      onError: (error) =>
+        setNotice(isApiError(error) && error.status === 422 ? t("rsv.my.cancel.started") : t("rsv.my.cancel.failed")),
       onSettled: () => setTarget(null),
     });
   }
 
   /** 시작 이후 예약과 이미 취소한 예약은 [취소]를 보이지 않거나 비활성으로 둔다 (C-RSV-MY-002) */
-  const cancelButton = (item: MyReservationItem) =>
+  const cancelButton = (item: MyReservationItem, testId: string) =>
     item.status === "RESERVED" ? (
       <Button
         type="button"
         variant="destructive"
         size="sm"
+        data-testid={testId}
         disabled={item.startAt <= now}
         onClick={() => setTarget(item.reservationId)}
       >
@@ -76,7 +78,7 @@ export default function MyReservationsPage() {
             </TableHeader>
             <TableBody>
               {reservations.data.map((item) => (
-                <TableRow key={item.reservationId}>
+                <TableRow key={item.reservationId} data-testid={`row-${item.reservationId}`}>
                   <TableCell>{item.meetingRoomName}</TableCell>
                   <TableCell>{formatRange(item.startAt, item.endAt)}</TableCell>
                   <TableCell>{item.title ?? "-"}</TableCell>
@@ -88,7 +90,7 @@ export default function MyReservationsPage() {
                       )}
                     </div>
                   </TableCell>
-                  <TableCell className="text-right">{cancelButton(item)}</TableCell>
+                  <TableCell className="text-right">{cancelButton(item, `cancel-${item.reservationId}`)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -98,7 +100,7 @@ export default function MyReservationsPage() {
         {/* 모바일: 카드 목록, [취소]는 카드 하단 */}
         <ul className="space-y-3 md:hidden">
           {reservations.data.map((item) => (
-            <li key={item.reservationId} className="space-y-2 rounded-lg border p-3 text-sm">
+            <li key={item.reservationId} data-testid={`card-${item.reservationId}`} className="space-y-2 rounded-lg border p-3 text-sm">
               <div className="flex items-center justify-between gap-2">
                 <span className="font-bold">{item.meetingRoomName}</span>
                 <StatusBadge status={item.status} />
@@ -108,7 +110,9 @@ export default function MyReservationsPage() {
               {item.cancelledAt && (
                 <p className="text-xs text-muted-foreground">{formatDateTime(item.cancelledAt)} 취소</p>
               )}
-              {cancelButton(item) && <div className="flex justify-end">{cancelButton(item)}</div>}
+              {item.status === "RESERVED" && (
+                <div className="flex justify-end">{cancelButton(item, `card-cancel-${item.reservationId}`)}</div>
+              )}
             </li>
           ))}
         </ul>
@@ -120,7 +124,7 @@ export default function MyReservationsPage() {
     <>
       <h1 className="mb-6 text-2xl font-bold">내 예약</h1>
       {notice && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert variant="destructive" className="mb-4" data-testid="form-error">
           <AlertDescription>{notice}</AlertDescription>
         </Alert>
       )}

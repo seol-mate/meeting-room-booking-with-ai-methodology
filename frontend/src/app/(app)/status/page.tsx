@@ -15,7 +15,7 @@ import { useRooms } from "@/hooks/use-meeting-rooms";
 import { useReservationStatus } from "@/hooks/use-reservations";
 import { t } from "@/lib/messages";
 import { halfHours, splitLocalDateTime, todayString } from "@/lib/time";
-import type { ReservationStatusItem } from "@/mock/api";
+import type { ReservationStatusItem } from "@/types/domain";
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -114,7 +114,7 @@ function StatusView() {
         <>
           {/* 데스크톱·태블릿: 회의실 × 30분 시간표 */}
           <div className="hidden overflow-x-auto md:block">
-            <table className="w-full min-w-[40rem] table-fixed border-collapse text-sm">
+            <table data-testid="status-table" className="w-full min-w-[40rem] table-fixed border-collapse text-sm">
               <caption className="sr-only">{date} 예약 현황</caption>
               <thead>
                 <tr>
@@ -146,6 +146,7 @@ function StatusView() {
                       return (
                         <td
                           key={room.meetingRoomId}
+                          data-testid={`cell-${room.meetingRoomId}-${slot}`}
                           className={
                             hit
                               ? "border-b bg-primary/10 p-2"

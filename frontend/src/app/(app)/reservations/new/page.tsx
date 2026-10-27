@@ -16,7 +16,7 @@ import { isApiError } from "@/lib/api-error";
 import { t } from "@/lib/messages";
 import { fieldErrors, reservationFormSchema } from "@/lib/schemas";
 import { allHalfHours, toLocalDateTime, todayString } from "@/lib/time";
-import type { MeetingRoom } from "@/mock/data";
+import type { MeetingRoom } from "@/types/domain";
 import { useToastStore } from "@/store/toast-store";
 
 const roomLabel = (room: MeetingRoom) => {
@@ -72,7 +72,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
   return (
     <form className="max-w-lg space-y-4" onSubmit={onSubmit} noValidate>
       {failure && (
-        <Alert variant="destructive">
+        <Alert variant="destructive" data-testid="form-error">
           <AlertDescription>{failure}</AlertDescription>
         </Alert>
       )}
@@ -80,6 +80,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
         <Label htmlFor="room">회의실</Label>
         <NativeSelect
           id="room"
+          data-testid="field-room"
           name="room"
           value={values.meetingRoomId}
           onChange={(e) => setValues({ ...values, meetingRoomId: e.target.value })}
@@ -98,6 +99,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
         <Label htmlFor="date">날짜</Label>
         <Input
           id="date"
+          data-testid="field-date"
           name="date"
           type="date"
           value={values.date}
@@ -109,6 +111,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
           <Label htmlFor="start">시작</Label>
           <NativeSelect
             id="start"
+            data-testid="field-start"
             name="start"
             value={values.start}
             onChange={(e) => setValues({ ...values, start: e.target.value })}
@@ -122,6 +125,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
           <Label htmlFor="end">종료</Label>
           <NativeSelect
             id="end"
+            data-testid="field-end"
             name="end"
             value={values.end}
             aria-invalid={Boolean(errors.end)}
@@ -140,6 +144,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
         <Label htmlFor="title">회의 제목</Label>
         <Input
           id="title"
+          data-testid="field-title"
           name="title"
           value={values.title}
           maxLength={200}
@@ -148,7 +153,7 @@ function ReservationForm({ rooms }: { rooms: MeetingRoom[] }) {
       </div>
       {/* 모바일에서는 [예약]을 하단에 고정한다 */}
       <div className="sticky bottom-0 -mx-4 flex gap-2 border-t bg-background px-4 py-3 md:static md:mx-0 md:border-0 md:px-0">
-        <Button type="submit" size="lg" disabled={create.isPending || values.meetingRoomId === ""}>
+        <Button type="submit" size="lg" data-testid="submit-button" disabled={create.isPending || values.meetingRoomId === ""}>
           예약
         </Button>
         <Link href="/status" className={buttonVariants({ variant: "outline", size: "lg" })}>

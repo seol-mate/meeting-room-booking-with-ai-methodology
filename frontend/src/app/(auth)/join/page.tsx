@@ -61,7 +61,7 @@ export default function JoinPage() {
   return (
     <AuthShell title="계정 가입">
       {failure && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert variant="destructive" className="mb-4" data-testid="form-error">
           <AlertDescription>{failure}</AlertDescription>
         </Alert>
       )}
@@ -70,6 +70,7 @@ export default function JoinPage() {
           <Label htmlFor="loginId">로그인 ID</Label>
           <Input
             id="loginId"
+            data-testid="field-loginId"
             name="loginId"
             autoComplete="username"
             value={values.loginId}
@@ -84,6 +85,7 @@ export default function JoinPage() {
           <Label htmlFor="name">이름</Label>
           <Input
             id="name"
+            data-testid="field-name"
             name="name"
             autoComplete="name"
             value={values.name}
@@ -97,6 +99,7 @@ export default function JoinPage() {
           <Label htmlFor="password">비밀번호</Label>
           <Input
             id="password"
+            data-testid="field-password"
             name="password"
             type="password"
             autoComplete="new-password"
@@ -107,7 +110,7 @@ export default function JoinPage() {
           />
           <FieldError id="password-error" message={errors.password} />
         </div>
-        <Button type="submit" size="lg" className="w-full" disabled={signup.isPending}>
+        <Button type="submit" size="lg" data-testid="submit-button" className="w-full" disabled={signup.isPending}>
           가입
         </Button>
       </form>

@@ -6,7 +6,7 @@ import { isApiError } from "@/lib/api-error";
 
 /** 4xx 응답은 다시 시도해도 같으므로 재시도하지 않는다 */
 function shouldRetry(failureCount: number, error: unknown): boolean {
-  if (isApiError(error) && error.status < 500) return false;
+  if (isApiError(error) && error.status >= 400 && error.status < 500) return false;
   return failureCount < 1;
 }
 

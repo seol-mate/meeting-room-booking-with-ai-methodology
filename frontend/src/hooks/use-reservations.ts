@@ -1,17 +1,19 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import * as api from "@/mock/api";
+import * as api from "@/api/meeting-room";
+import * as reservationApi from "@/api/reservation";
+import type { ReservationInput } from "@/types/domain";
 
 export function useReservationStatus(date: string, meetingRoomId?: number) {
   return useQuery({
     queryKey: ["reservations", "status", date, meetingRoomId ?? null],
-    queryFn: () => api.listReservationStatus({ date, meetingRoomId }),
+    queryFn: () => reservationApi.listReservationStatus({ date, meetingRoomId }),
   });
 }
 
 export function useMyReservations() {
-  return useQuery({ queryKey: ["reservations", "mine"], queryFn: api.listMyReservations });
+  return useQuery({ queryKey: ["reservations", "mine"], queryFn: () => reservationApi.listMyReservations() });
 }
 
 export function useAdminReservations(params: { from: string; to: string; meetingRoomId?: number }, enabled = true) {
@@ -25,7 +27,7 @@ export function useAdminReservations(params: { from: string; to: string; meeting
 export function useCreateReservation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: api.createReservation,
+    mutationFn: (input: ReservationInput) => reservationApi.createReservation(input),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["reservations"] }),
   });
 }
@@ -33,7 +35,7 @@ export function useCreateReservation() {
 export function useCancelReservation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: api.cancelReservation,
+    mutationFn: (reservationId: number) => reservationApi.cancelReservation(reservationId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["reservations"] }),
   });
 }

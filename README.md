@@ -24,7 +24,7 @@ NuriAiM 방법론으로 만드는 회의실 예약 시스템. 산출물은 `docs
 ```bash
 cd frontend
 npm install
-cp .env.local.example .env.local   # API 주소 (백엔드 준비 전에는 기본값 그대로)
+cp .env.local.example .env.local   # 개발 서버가 /api/* 를 넘겨 줄 백엔드 주소 (기본 http://localhost:8081)
 npm run dev                        # http://localhost:3000
 ```
 
@@ -35,13 +35,56 @@ npm run dev                        # http://localhost:3000
 
 #### 전체 화면 통합 (5-IM-11)
 
-시안(4-DN-38)에 라우팅·상태·검증을 붙여 mock 데이터로 동작하는 프로토타입으로 통합했다. 확인서는 `docs/5-IM-11-O1 전체 화면 코드베이스.md`.
+시안(4-DN-38)에 라우팅·상태·검증을 붙여 mock 데이터로 동작하는 프로토타입으로 통합했다(mock은 5-IM-14에서 제거되었다 — 아래 「화면 결선 현황」). 확인서는 `docs/5-IM-11-O1 전체 화면 코드베이스.md`.
 
 - **구조**: 화면(`src/app`) → React Query 훅(`src/hooks`) → mock API(`src/mock/api.ts`). 5-IM-14에서 mock API 본문만 실제 호출로 바꾸고 `src/mock`을 걷어낸다.
 - **인증·권한**: `(app)/layout.tsx`의 `AuthGate`가 로그인 상태를 확인하고(미로그인·세션 만료는 `/login`으로), `admin/layout.tsx`의 `RoleGuard`가 관리 담당자만 통과시킨다.
 - **mock 계정**: `manager`(회의실 관리 담당자)와 `staff`(일반 사용자) — 비밀번호는 `src/mock/data.ts`. 데이터와 로그인은 브라우저 sessionStorage에 저장되며 탭을 닫으면 초기화된다.
 - **폼 검증**: Zod(`src/lib/schemas.ts`), 메시지는 `src/lib/messages.ts`(`4-DN-36-O1` message_key).
 - 알려진 안내: 개발 서버(`npm run dev`)가 Next.js 「즉시 탐색 검증」 Insight 1건을 표시한다 — 개발 모드 전용이며 빌드·동작에 영향이 없다.
+
+#### 화면 결선 현황 (5-IM-14)
+
+mock을 걷어내고 8개 화면을 백엔드 API에 결선했다. 구조: 화면(`src/app`) → React Query 훅(`src/hooks`) → API 호출 함수(`src/api/reservation.ts`·`meeting-room.ts`, Zod로 응답 검증) → Axios(`src/lib/axios.ts`).
+
+- **API 계약**: `npm run codegen:api`가 만든 `src/types/api-<도메인>.d.ts`가 정본이고, `src/types/contract-check.ts`가 화면 타입(`domain.ts`)이 생성 타입과 어긋나면 typecheck를 실패시킨다. 호출 함수·Zod 스키마는 `operationId` 순서로 손으로 유지한다(`5-IM-05-O1` §3).
+- **호출 경로**: 브라우저는 `{개발 origin}/api/v1/...`만 부른다. 경로 문자열에 앞 슬래시를 쓰지 않고(`api/v1/...`, baseURL `/`), `next.config.ts`의 rewrites가 `/api/*`를 `API_PROXY_TARGET`(기본 `http://localhost:8081`)으로 넘긴다. 같은 출처라 세션 쿠키(JSESSIONID)와 CORS 설정이 필요 없다.
+- **서버 상태**: React Query만 쓴다. Zustand는 토스트(`toast-store`)·앱 UI 상태만 가진다(서버 데이터 이중 저장 없음).
+- **헤더**: 로그아웃 요구사항이 없어(5-IM-22에서 기각 확정) [로그아웃] 버튼을 뺐다. `4-DN-38-O1` §4.1 정정은 별도 반영했다.
+- **회의실 관리 담당자(ROOM_MANAGER)**: 생성 수단이 정해지지 않았다(조건 C2). 개발·시험에서는 DB에서 직접 올린다 — `update reserver set role='ROOM_MANAGER' where login_id='…'`.
+- **사용법 문서(dev-guide류) 갱신(im-14.P14)**: 소비 프로젝트가 참조하는 사용법 문서가 없다(사전 질의 답: 「없음」). 이 README의 위 설명이 유일한 안내다.
+- **NuriAF 메시지 시드(im-14.P16)**: 해당 없음(NuriAF 프로젝트가 아니다).
+
+**§5 UI 동작 ↔ endpoint ↔ 훅**
+
+| screen_id | UI 동작 | operationId | 훅 |
+|-----------|---------|-------------|----|
+| SCR-RSV-001 | 로그인 상태 확인 / [로그인] | reservation-002 / reservation-001 | `useMe` / `useLogin` |
+| SCR-RSV-002 | ID 중복 확인 / [가입] | reservation-004 / reservation-003 | `useLoginIdAvailability` / `useSignup` |
+| SCR-RSV-003 | 회의실 열 / 예약 현황 | meeting-room-001 / reservation-005 | `useRooms` / `useReservationStatus` |
+| SCR-RSV-004 | 회의실 선택 / [예약] | meeting-room-001 / reservation-006 | `useRooms` / `useCreateReservation` |
+| SCR-RSV-005 | 내 예약 목록 / [취소] | reservation-007 / reservation-008 | `useMyReservations` / `useCancelReservation` |
+| SCR-MTR-001 | 회의실 목록 | meeting-room-001 | `useRooms` |
+| SCR-MTR-002 | 대상 조회 / 신규 저장 / 변경 저장 | meeting-room-003 / 002 / 004 | `useRoom` / `useCreateRoom` / `useUpdateRoom` |
+| SCR-MTR-003 | 전체 예약 / 조건용 회의실 / [취소] | meeting-room-005 / 001 / reservation-008 | `useAdminReservations` / `useRooms` / `useCancelReservation` |
+
+**결선 행** (결선 일자 2026-10-27, 전체 `npm test` 13파일 127개 통과, typecheck·lint·build 통과)
+
+| screen_id | 결선 일자 | 테스트 결과 | 관련 dev-guide 갱신 |
+|-----------|-----------|-------------|---------------------|
+| SCR-RSV-001 로그인 | 2026-10-27 | 12/12 통과 (+ 가드·API 계층 공통 테스트) | 없음 — 닿는 사용법 문서 없음 |
+| SCR-RSV-002 계정 가입 | 2026-10-27 | 11/11 통과 | 없음 |
+| SCR-RSV-003 예약 현황 | 2026-10-27 | 8/8 통과 | 없음 |
+| SCR-RSV-004 회의실 예약 | 2026-10-27 | 14/14 통과 | 없음 |
+| SCR-RSV-005 내 예약 | 2026-10-27 | 9/9 통과 | 없음 |
+| SCR-MTR-001 회의실 목록 | 2026-10-27 | 6/6 통과 | 없음 |
+| SCR-MTR-002 회의실 등록·변경 | 2026-10-27 | 14/14 통과 | 없음 |
+| SCR-MTR-003 전체 예약 조회 | 2026-10-27 | 11/11 통과 | 없음 |
+
+- 증적: Red 실행 로그 `docs/evidence/5-IM-14-red-run.log`(테스트 선행 커밋 `0397630`), Green 실행 로그 `5-IM-14-green-run.log`, `5-IM-14-typecheck.log`.
+- 추적: 화면 명세 §3.2 `F-`·§4 `V-`·§7 `UX-` 122개 ID 전부와 §2 「근거 요구사항」 REQ-ID 전부가 테스트의 `@trace`에 있다(누락·지어낸 ID 0건, 대조 스크립트 결과).
+- 실서버 확인(2026-10-27): 개발 서버 → 백엔드 프록시로 가입·로그인·예약 등록·겹침 거부(409)·예약 현황·전체 예약 조회·취소를 끝까지 실행했다. 브라우저 Network는 `/api/v1/...` 요청만 보였다.
+- 화면 안 계정 가입 직후 로그인, 미로그인 이동(`/login?reason=required`), 권한 없는 접근 화면(`이 화면에 접근할 권한이 없습니다`)은 가드 테스트로 검증했다.
 
 ### Backend (`backend/`)
 

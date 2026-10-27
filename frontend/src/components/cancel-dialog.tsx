@@ -35,7 +35,7 @@ export function CancelDialog({
           <Button type="button" variant="outline" onClick={onClose} disabled={pending}>
             닫기
           </Button>
-          <Button type="button" variant="destructive" onClick={onConfirm} disabled={pending}>
+          <Button type="button" variant="destructive" data-testid="confirm-cancel" onClick={onConfirm} disabled={pending}>
             예약 취소
           </Button>
         </DialogFooter>

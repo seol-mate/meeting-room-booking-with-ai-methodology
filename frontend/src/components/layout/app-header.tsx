@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { useLogout } from "@/hooks/use-auth";
-import type { LoginUser } from "@/mock/api";
+import { usePathname } from "next/navigation";
+import { buttonVariants } from "@/components/ui/button";
+import type { LoginUser } from "@/types/domain";
 
 const userNav = [
   { href: "/status", label: "예약 현황" },
@@ -18,11 +17,9 @@ const managerNav = [
   { href: "/admin/reservations", label: "전체 예약" },
 ];
 
-/** 로그인 후 화면 공통 헤더 — 서비스명, 역할별 메뉴, 사용자 이름, [로그아웃] (4-DN-38-O1 §4.1) */
+/** 로그인 후 화면 공통 헤더 — 서비스명, 역할별 메뉴, 사용자 이름 (로그아웃은 요구사항에 없어 두지 않는다 — 5-IM-22 기각 결정) */
 export function AppHeader({ user }: { user: LoginUser }) {
   const pathname = usePathname();
-  const router = useRouter();
-  const logout = useLogout();
   const nav = user.role === "ROOM_MANAGER" ? [...userNav, ...managerNav] : userNav;
 
   return (
@@ -48,15 +45,6 @@ export function AppHeader({ user }: { user: LoginUser }) {
         </nav>
         <div className="ml-auto flex items-center gap-3 text-sm">
           <span>{user.name}</span>
-          <Button
-            variant="outline"
-            size="sm"
-            type="button"
-            disabled={logout.isPending}
-            onClick={() => logout.mutate(undefined, { onSuccess: () => router.replace("/login") })}
-          >
-            로그아웃
-          </Button>
         </div>
       </div>
     </header>

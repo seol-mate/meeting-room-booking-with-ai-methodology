@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import type { ReservationStatus } from "@/mock/data";
+import type { ReservationStatus } from "@/types/domain";
 
 /** 예약 상태 배지 — 색과 라벨을 함께 쓴다 (4-DN-33-O1 §8.1) */
 export function StatusBadge({ status }: { status: ReservationStatus }) {
