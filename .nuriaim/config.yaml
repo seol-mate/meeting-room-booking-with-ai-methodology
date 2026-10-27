@@ -182,6 +182,8 @@ artifacts:
     - 5-IM-05-O1   # 코딩 컨벤션 규칙
     - 5-IM-06      # 엔티티 코드 구현
     - 5-IM-04      # 공통 기능 구현
+    - 5-IM-12-O1-reservation    # API 명세서(예약)
+    - 5-IM-12-O1-meeting-room   # API 명세서(회의실)
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.

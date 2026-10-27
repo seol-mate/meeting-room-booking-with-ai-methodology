@@ -412,3 +412,29 @@ events:
     tier: build
     self_approval: true
     note: "커밋 c8419f0 — 프로젝트 구현 모듈 3종(AuthFilter·공통 예외/응답·공통 로깅) + 포트 LoginUserLookup 선언, ./mvnw test 33개 통과, 기동 후 401·CORS·요청 ID·로그 형식 확인"
+  - artifact: 5-IM-12-O1-reservation
+    version: "1.0.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 15:20
+  - artifact: 5-IM-12-O1-reservation
+    version: "1.0.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 15:21
+    tier: design
+    self_approval: true
+    note: "커밋 0981c0b — openapi-typescript 파싱 통과, 인덱스·x-req-ids·참조 점검"
+  - artifact: 5-IM-12-O1-meeting-room
+    version: "1.0.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 15:20
+  - artifact: 5-IM-12-O1-meeting-room
+    version: "1.0.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 15:21
+    tier: design
+    self_approval: true
+    note: "커밋 0981c0b — openapi-typescript 파싱 통과, 인덱스·x-req-ids·참조 점검"
