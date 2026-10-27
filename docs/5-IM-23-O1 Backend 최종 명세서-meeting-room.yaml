@@ -6,7 +6,7 @@ program:
   id: "meeting-room"
   name: "회의실"
   project: "회의실 예약 시스템"
-  version: "1.0"
+  version: "1.0.1"
   author: "설동혁 DV"
   authored_at: "2026-10-27"
   history:
@@ -14,6 +14,10 @@ program:
       date: "2026-10-27"
       by: "설동혁 DV"
       note: "최초 작성"
+    - version: "1.0.1"
+      date: "2026-10-27"
+      by: "설동혁 DV"
+      note: "정정 — 5-IM-24 착수 중 발견: 저장소 정렬 동작에 속하는 TE-meeting-room-U04 desc를 단위 경계에 맞게 고쳤다. 동작 변경 없음"
 
 source_inputs:
   api_spec: "5-IM-12-O1 API 명세서-meeting-room.yaml"
@@ -526,7 +530,7 @@ implementation_targets:
       - id: "TE-meeting-room-U04"
         req: ["REQ-F-002"]
         endpoint: "meeting-room-001"
-        desc: "MeetingRoomService.findAll — 일반 사용자에게도 회의실명 순으로 전체를 반환하고 회의실이 없으면 빈 목록"
+        desc: "MeetingRoomService.findAll — 일반 사용자에게도 저장소가 준 회의실명 순서 그대로 전체를 반환하고 회의실이 없으면 빈 목록"
       - id: "TE-meeting-room-U05"
         req: ["REQ-F-003", "REQ-F-004"]
         endpoint: null

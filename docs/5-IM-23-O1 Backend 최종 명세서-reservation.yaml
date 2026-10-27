@@ -6,7 +6,7 @@ program:
   id: "reservation"
   name: "예약"
   project: "회의실 예약 시스템"
-  version: "1.0"
+  version: "1.0.1"
   author: "설동혁 DV"
   authored_at: "2026-10-27"
   history:
@@ -14,6 +14,10 @@ program:
       date: "2026-10-27"
       by: "설동혁 DV"
       note: "최초 작성"
+    - version: "1.0.1"
+      date: "2026-10-27"
+      by: "설동혁 DV"
+      note: "정정 — 5-IM-24 착수 중 발견: 서비스는 HTTP 타입에 의존하지 않으므로 로그인 세션 시작을 컨트롤러로 옮기고, me 조회에 이름이 필요해 AccountService.me를 추가했다. 저장소 쿼리 동작에 속하는 TE desc(U02·U05·U07·U08·U11·I02·I04·I05)를 단위/통합 경계에 맞게 고쳤다. 동작 변경 없음"
 
 source_inputs:
   api_spec: "5-IM-12-O1 API 명세서-reservation.yaml"
@@ -236,7 +240,7 @@ backend_design:
           - role: "ROOM_MANAGER"
             condition: "로그인한 본인"
       transaction:
-        boundary: "서비스 호출 없이 컨트롤러가 CurrentUserProvider 결과를 변환"
+        boundary: "단일 서비스 메서드 AccountService.me(읽기 전용)"
       persistence:
         query_strategy: "AuthFilter 단계의 LoginUserLookup 어댑터가 ReserverRepository.findById 조회"
       response_mapping:
@@ -640,8 +644,13 @@ implementation_targets:
             steps:
               - "1. ReserverRepository.findByLoginId로 계정을 찾는다. 없으면 BusinessException(BAD_REQUEST, rsv.login.submit.failed 문구)"
               - "2. PasswordEncoder.matches로 비밀번호를 대조한다. 불일치면 1과 같은 예외(어느 쪽이 틀렸는지 구분하지 않는다)"
-              - "3. LoginSession.begin(request, reserverId)로 세션을 시작한다 — HttpServletRequest는 컨트롤러가 넘기고 서비스는 세션 시작을 호출만 한다"
-              - "4. LoginUserResponse로 변환해 반환한다"
+              - "3. LoginUserResponse로 변환해 반환한다. 세션 시작(LoginSession.begin)은 HTTP 타입이 필요하므로 컨트롤러가 이 반환값의 reserverId로 호출한다(서비스는 HttpServletRequest에 의존하지 않는다 — 4-DN-21-O3 Service 규칙)"
+          - name: "me"
+            transaction: "@Transactional(readOnly = true)"
+            steps:
+              - "1. CurrentUserProvider.require()로 현재 사용자를 얻는다(없으면 401)"
+              - "2. ReserverRepository.findById(userId)로 이름·역할을 조회한다 — 없으면 BusinessException(UNAUTHORIZED)"
+              - "3. LoginUserResponse로 변환해 반환한다"
           - name: "signup"
             transaction: "@Transactional"
             steps:
@@ -794,11 +803,11 @@ implementation_targets:
       - id: "TE-reservation-U02"
         req: ["REQ-F-001"]
         endpoint: "reservation-003"
-        desc: "AccountService.signup — 중복 ID는 CONFLICT, 성공 시 role=USER이고 저장되는 값이 평문이 아닌 해시이며 요청에 role이 있어도 무시한다"
+        desc: "AccountService.signup — 중복 ID는 CONFLICT, 성공 시 role=USER이고 저장되는 값이 평문이 아닌 해시이며 세션은 시작하지 않는다"
       - id: "TE-reservation-U03"
         req: ["REQ-F-001"]
         endpoint: "reservation-004"
-        desc: "AccountService.loginIdAvailable·findLoginUser — 쓰는 ID는 available=false, 없는 사용자 식별자는 Optional.empty"
+        desc: "AccountService.loginIdAvailable·findLoginUser·me — 쓰는 ID는 available=false, 없는 사용자 식별자는 Optional.empty, me는 현재 사용자의 이름·역할을 돌려주고 사용자가 없으면 UNAUTHORIZED"
       - id: "TE-reservation-U04"
         req: ["REQ-F-002"]
         endpoint: "reservation-005"
@@ -806,7 +815,7 @@ implementation_targets:
       - id: "TE-reservation-U05"
         req: ["REQ-F-002"]
         endpoint: "reservation-005"
-        desc: "ReservationService.findStatus — 취소된 예약은 현황에 나오지 않고 회의실·시작 일시 순으로 정렬된다"
+        desc: "ReservationService.findStatus — 날짜의 00:00 이상 다음 날 00:00 미만, 회의실 필터를 저장소에 그대로 넘기고 저장소가 준 회의실·시작 순서를 유지한다"
       - id: "TE-reservation-U06"
         req: ["REQ-F-003"]
         endpoint: "reservation-006"
@@ -814,11 +823,11 @@ implementation_targets:
       - id: "TE-reservation-U07"
         req: ["REQ-F-004"]
         endpoint: "reservation-006"
-        desc: "ReservationService.create — 겹치면 CONFLICT, 끝과 시작이 맞닿으면 통과, 취소된 예약과는 겹치지 않으며, 없는 회의실은 NOT_FOUND"
+        desc: "ReservationService.create — 겹침 확인이 true면 CONFLICT이고 저장하지 않으며, 없는 회의실은 NOT_FOUND, 통과하면 본인 명의 RESERVED 예약을 저장한다"
       - id: "TE-reservation-U08"
         req: ["REQ-F-005"]
         endpoint: "reservation-007"
-        desc: "ReservationService.findMine — 본인 예약만 취소된 예약 포함으로 시작 일시 내림차순 반환한다"
+        desc: "ReservationService.findMine — 현재 사용자의 식별자로 저장소를 조회하고 회의실명을 붙여 저장소가 준 순서(시작 일시 내림차순)로 반환한다"
       - id: "TE-reservation-U09"
         req: ["REQ-F-005"]
         endpoint: "reservation-008"
@@ -830,7 +839,7 @@ implementation_targets:
       - id: "TE-reservation-U11"
         req: ["REQ-F-008"]
         endpoint: null
-        desc: "ReservationService.findActiveReservationsInPeriod(서비스 계약) — 기간 경계일 포함, RESERVED만, 회의실 지정 필터, 제목 전체 포함, 시작 일시 순"
+        desc: "ReservationService.findActiveReservationsInPeriod(서비스 계약) — 시작일 00:00 이상 종료일 다음 날 00:00 미만으로(경계일 포함) 저장소를 조회하고 회의실 지정 필터와 제목 전체를 그대로 돌려준다"
     integration:
       - id: "TE-reservation-I01"
         req: ["REQ-F-001"]
@@ -839,7 +848,7 @@ implementation_targets:
       - id: "TE-reservation-I02"
         req: ["REQ-F-004"]
         endpoint: "reservation-006"
-        desc: "같은 회의실·겹치는 시간을 서비스 확인을 우회해 저장하면 DB 배제 제약 ex_reservation_overlap이 거부하고 API는 409를 돌려준다(Testcontainers PostgreSQL)"
+        desc: "겹침 저장소 쿼리와 DB 제약 — 겹치면 true, 끝과 시작이 맞닿으면 false, 취소된 예약과는 겹치지 않는다. 서비스 확인을 우회해 겹치는 예약을 저장하면 DB 배제 제약 ex_reservation_overlap이 거부하고 API는 409를 돌려준다(Testcontainers PostgreSQL)"
       - id: "TE-reservation-I03"
         req: ["REQ-F-003"]
         endpoint: "reservation-006"
@@ -847,11 +856,11 @@ implementation_targets:
       - id: "TE-reservation-I04"
         req: ["REQ-F-005"]
         endpoint: "reservation-008"
-        desc: "예약 취소 API — 취소 후 내 예약 목록에 취소됨과 취소 일시가 보이고 같은 시간대를 다시 예약할 수 있다"
+        desc: "예약 취소 API — 취소 후 내 예약 목록(본인 예약만, 취소 포함, 시작 일시 내림차순)에 취소됨과 취소 일시가 보이고 같은 시간대를 다시 예약할 수 있다"
       - id: "TE-reservation-I05"
         req: ["REQ-F-002"]
         endpoint: "reservation-005"
-        desc: "예약 현황 API — 날짜·회의실 필터, 일반 사용자와 ROOM_MANAGER의 제목 노출 차이, date 형식 오류 400"
+        desc: "예약 현황 API — 날짜·회의실 필터, 취소된 예약 제외, 회의실·시작 순 정렬, 일반 사용자와 ROOM_MANAGER의 제목 노출 차이, date 형식 오류 400"
       - id: "TE-reservation-I06"
         req: ["REQ-F-006"]
         endpoint: "reservation-008"
