@@ -187,6 +187,7 @@ artifacts:
     - 5-IM-11-O1   # 전체 화면 코드베이스
     - 5-IM-21-O1-reservation   # Backend 초안(예약)
     - 5-IM-21-O1-meeting-room  # Backend 초안(회의실)
+    - 5-IM-22-O1-meeting-room  # 정합성 점검 보고서(회의실)
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.
