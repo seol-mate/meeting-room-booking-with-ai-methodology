@@ -1,0 +1,23 @@
+{
+  "generated": "2026-10-27",
+  "domains": {
+    "reservation": {
+      "specVersion": "1.0.1",
+      "testExpectations": 17,
+      "covered": 17,
+      "missing": [],
+      "invalid": []
+    },
+    "meeting-room": {
+      "specVersion": "1.0.1",
+      "testExpectations": 12,
+      "covered": 12,
+      "missing": [],
+      "invalid": []
+    }
+  },
+  "traceComments": 56,
+  "unknownIds": [],
+  "missing": 0,
+  "invalid": 0
+}

@@ -75,16 +75,24 @@ public class ReservationEntity extends BaseEntity {
 		this.title = title;
 	}
 
+	/** 예약 취소 — 삭제가 아니라 상태 갱신이며 취소 일시·취소자를 기록한다 (BR-02) */
+	public void cancel(LocalDateTime cancelledAt, Long cancelledBy) {
+		this.status = ReservationStatus.CANCELLED;
+		this.cancelledAt = cancelledAt;
+		this.cancelledBy = cancelledBy;
+	}
+
 	public Long getReservationId() {
 		return reservationId;
 	}
 
+	/** 읽기 전용 컬럼 값이 아직 채워지지 않은 같은 트랜잭션의 새 엔티티는 연관관계에서 식별자를 얻는다 */
 	public Long getMeetingRoomId() {
-		return meetingRoomId;
+		return meetingRoomId != null || meetingRoom == null ? meetingRoomId : meetingRoom.getMeetingRoomId();
 	}
 
 	public Long getReserverId() {
-		return reserverId;
+		return reserverId != null || reserver == null ? reserverId : reserver.getReserverId();
 	}
 
 	public MeetingRoomEntity getMeetingRoom() {

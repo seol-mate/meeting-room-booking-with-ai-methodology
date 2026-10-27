@@ -121,3 +121,17 @@ SPRING_PROFILES_ACTIVE=local ./mvnw spring-boot:run   # http://localhost:8081/ac
 - **페이징**: `PageParams.toPageable`(page 1부터, size 기본 20·최대 100, 정렬 허용 속성 지정)과 `PageData`(`items` + `pagination`)가 4-DN-21-O3 §3 규약을 구현한다.
 - **데이터 접근 공통 설정**: JPA Auditing(`JpaAuditingConfig`). QueryDSL은 설정하지 않았다(필요해지면 호환 확인 후 추가).
 - 검증(2026-10-27): `./mvnw test` 33개 통과(공통 기능 단위 테스트 32개 + 골격 1개). 기동 후 미로그인 요청이 401 봉투·CORS 헤더·요청 ID와 함께 거부되고 로그 형식이 규칙대로 찍히는 것을 확인했다.
+
+#### Backend 구현 현황 (5-IM-24)
+
+| domainId | 구현 일자 | 범위 | 테스트 결과 | 관련 사용법 문서(dev-guide) |
+|----------|-----------|------|-------------|------------------------------|
+| reservation | 2026-10-27 | API 8개(reservation-001~008), `AccountService`·`ReservationService`, `ReserverRepository`·`ReservationRepository`, 서비스 계약 `findActiveReservationsInPeriod`, `LoginUserLookup` 어댑터, BCrypt 설정, `ReservationEntity.cancel` | 단위 + 통합 `TE-reservation-*` 17개 전부 통과 | 없음 — 소비 프로젝트가 참조하는 사용법 문서가 없는 자체 구현 프로젝트다 |
+| meeting-room | 2026-10-27 | API 5개(meeting-room-001~005), `MeetingRoomService`·`AdminReservationQueryService`, `MeetingRoomRepository`, 서비스 계약 `existsById`·`findNamesByIds`, `MeetingRoomEntity.update` | 단위 + 통합 `TE-meeting-room-*` 12개 전부 통과 | 없음 — 위와 같다 |
+
+- 전체 `./mvnw test` 82개 통과(공통 기능·골격 33개 + 이번 49개). 통합 테스트는 Testcontainers PostgreSQL을 쓴다(Docker 필요).
+- Test-First: 테스트를 먼저 커밋했고(`bce936f`, Red 실행 증적 `docs/evidence/5-IM-24-red-run.log`) 구현은 그 뒤 커밋이다. 추적 점검 결과(`@trace` ↔ 최종 명세서 TE 전수)는 `docs/evidence/5-IM-24-trace-scan.json` — 누락 0, 잘못된 ID 0.
+- 구현 중 최종 명세서를 정정 1.0.1로 고쳤다 — 서비스는 HTTP 타입에 의존하지 않으므로 로그인 세션 시작을 컨트롤러로 옮기고, 현재 사용자 이름 조회용 `AccountService.me`를 추가했고, 저장소 쿼리 동작에 속하는 TE 설명을 단위/통합 경계에 맞췄다. 동작 변경은 없다.
+- `ReservationEntity.getMeetingRoomId()`·`getReserverId()`는 읽기 전용 컬럼 값이 비어 있는 같은 트랜잭션의 새 엔티티에서 연관관계의 식별자를 대신 돌려준다(엔티티 코드 5-IM-06의 최소 수정).
+- 실서버 확인: 가입 → 로그인 → 회의실 등록 → 예약 등록 → 겹침 409 → 시간 규칙 422 → 제목 가리기 → 일반 사용자의 관리 API 403 → 취소(타인 403, 관리자 200) → 재취소 422.
+- 최초 `ROOM_MANAGER` 계정을 만드는 방법은 아직 없다(UI&UX 제약사항 조건 C2 미결). 임시로 DB의 `reserver.role`을 직접 바꾼다(`update reserver set role = 'ROOM_MANAGER' where login_id = '...'`).

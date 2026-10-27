@@ -49,6 +49,14 @@ public class MeetingRoomEntity extends BaseEntity {
 		this.equipment = equipment;
 	}
 
+	/** 회의실 정보 전체 교체 */
+	public void update(String name, String location, Integer capacity, String equipment) {
+		this.name = name;
+		this.location = location;
+		this.capacity = capacity;
+		this.equipment = equipment;
+	}
+
 	public Long getMeetingRoomId() {
 		return meetingRoomId;
 	}
