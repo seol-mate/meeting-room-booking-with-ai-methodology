@@ -456,3 +456,11 @@ events:
     kind: PM 대리
     proxy_basis: 유형—부재
     risk: RSK-01
+  - artifact: 5-IM-11-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 16:05
+    tier: build
+    self_approval: true
+    note: "커밋 55fe5a6 — 시각 검수(P10)는 에이전트 표본 확인을 PL이 검토·승인, 컨펌 ②는 PM 대리 확인(RSK-01)"
