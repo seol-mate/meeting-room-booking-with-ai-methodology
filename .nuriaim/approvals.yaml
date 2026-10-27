@@ -264,3 +264,15 @@ events:
     at: 2026-10-27 13:32
     tier: design
     self_approval: true
+  - artifact: 4-DN-32-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (PL)
+    at: 2026-10-27 13:40
+  - artifact: 4-DN-32-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-27 13:41
+    tier: design
+    self_approval: true
