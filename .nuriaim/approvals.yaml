@@ -321,3 +321,16 @@ events:
     at: 2026-10-27 13:46
     tier: design
     self_approval: true
+  - artifact: 5-IM-01-FE
+    version: "1.0"
+    event: requested
+    by: 설동혁 (AA)
+    at: 2026-10-27 13:56
+  - artifact: 5-IM-01-FE
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 13:57
+    tier: build
+    self_approval: true
+    note: "커밋 85b422d — typecheck·lint·build·test:coverage 통과, dev 서버 3000 응답 확인. 패키지 매니저는 npm(pnpm 미설치)"
