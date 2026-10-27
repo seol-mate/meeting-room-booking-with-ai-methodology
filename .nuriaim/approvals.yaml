@@ -438,3 +438,21 @@ events:
     tier: design
     self_approval: true
     note: "커밋 0981c0b — openapi-typescript 파싱 통과, 인덱스·x-req-ids·참조 점검"
+  - artifact: 5-IM-11-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 15:50
+  - artifact: 5-IM-11-O1
+    version: "1.0"
+    event: external_confirmed
+    by: 설동혁 (PM) — 발주처 대리(9-CM-06 유형—부재), RSK-01
+    recorded_by: 설동혁 (PM)
+    at: 2026-10-27 15:51
+    channel: 해당 없음(1인 프로젝트 — 받을 사람 없음)
+    seen: "전체 화면 프로토타입 8개 화면(frontend), 커밋 5bb9649 — mock 데이터로만 동작, 서버 연동 전"
+    said: 발주처 부재 — 제품 책임자 없는 1인 프로젝트(개인 테스트). 화면 골격·mock 동작이고 데이터 연동 전임을 PM이 알고 있음
+    result: 확인
+    kind: PM 대리
+    proxy_basis: 유형—부재
+    risk: RSK-01
