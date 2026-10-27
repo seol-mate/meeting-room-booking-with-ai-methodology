@@ -166,6 +166,9 @@ artifacts:
     - 4-DN-01-O1   # 시스템 아키텍처 정의서
     - 4-DN-12-O1   # 엔티티 명세서
     - 4-DN-12-O2   # entities.yaml
+    - 4-DN-14-O1   # ERD-overview
+    - 4-DN-14-O2-meeting-room   # ERD 회의실 도메인
+    - 4-DN-14-O2-reservation   # ERD 예약 도메인
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.
