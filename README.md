@@ -103,7 +103,7 @@ SPRING_PROFILES_ACTIVE=local ./mvnw spring-boot:run   # http://localhost:8081/ac
 동작:
 - **응답 형식**: 모든 응답을 `Envelope`(`success`/`data`/`error{code,message,errors}`/`meta{requestId,timestamp}`)로 통일한다(4-DN-21-O3 §2). 검증 오류 항목은 `error.errors`(ValidationError 배열)에 담는다. 오류 코드·상태 코드는 4-DN-21-O3 §4 표를 따르며 스택 트레이스는 응답에 싣지 않는다(4xx는 WARN, 5xx는 ERROR 로그).
 - **충돌 변환**: 고유·배제 제약 위반(PostgreSQL SQLState `23505`·`23P01`)은 409 `ERR-4090`으로 바꾼다 — 예약 겹침 제약(`ex_reservation_overlap`)도 이 경로다.
-- **인증**: 세션 기반. `AuthFilter`가 세션의 사용자 식별자(`LoginSession.USER_ID_ATTRIBUTE`)를 포트 `LoginUserLookup`으로 확인하고, 없으면 401 `ERR-4010`. 허용 경로는 `app.security.public-paths`(지금은 `/actuator/health`만), CORS 사전 요청(OPTIONS)은 검사하지 않는다. 서비스에서는 `CurrentUserProvider.require()`로 현재 사용자를 얻는다. JPA 감사(`created_by`·`updated_by`)도 이 값을 쓴다.
+- **인증**: 세션 기반. `AuthFilter`가 세션의 사용자 식별자(`LoginSession.USER_ID_ATTRIBUTE`)를 포트 `LoginUserLookup`으로 확인하고, 없으면 401 `ERR-4010`. 허용 경로는 `app.security.public-paths`(`/actuator/health`와 API 명세서(5-IM-12)의 공개 operation인 `/api/v1/auth/login`·`signup`·`login-id-availability`), CORS 사전 요청(OPTIONS)은 검사하지 않는다. 서비스에서는 `CurrentUserProvider.require()`로 현재 사용자를 얻는다. JPA 감사(`created_by`·`updated_by`)도 이 값을 쓴다.
 - **포트 선언(P7)**: `LoginUserLookup`(현재 로그인 사용자 식별)은 선언만 했다. 어댑터는 예약자 계정 서비스가 Backend 코드 구현(5-IM-24)에서 구현한다. 어댑터가 없는 동안에는 모든 보호 경로가 401이다.
 - **세션 설정**: 만료 30분(임시 — 확정 전, UI&UX 제약사항 조건 C3), 쿠키 HttpOnly·SameSite=Lax. CSRF 방어는 별도로 구현하지 않았다(소프트웨어 아키텍처 정의서의 AuthFilter 책임에 CSRF 정책이 없다).
 - **CORS**: 프런트엔드 출처(`FRONTEND_ORIGIN`, 기본 `http://localhost:3000`)만 쿠키 포함 요청을 허용한다. AuthFilter보다 먼저 적용해 401에도 CORS 헤더가 붙는다.

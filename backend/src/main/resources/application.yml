@@ -26,9 +26,12 @@ server:
 
 app:
   security:
-    # 로그인 없이 접근을 허용하는 경로. 로그인·계정 가입 경로는 API 명세서(5-IM-12) 확정 후 추가한다
+    # 로그인 없이 접근을 허용하는 경로 — API 명세서(5-IM-12-O1 reservation)의 security: [] operation
     public-paths:
       - /actuator/health
+      - /api/v1/auth/login
+      - /api/v1/auth/signup
+      - /api/v1/auth/login-id-availability
   cors:
     allowed-origins:
       - ${FRONTEND_ORIGIN:http://localhost:3000}
