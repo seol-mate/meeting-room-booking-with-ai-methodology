@@ -399,3 +399,16 @@ events:
     tier: build
     self_approval: true
     note: "커밋 d04eda0 — 엔티티 3종·BaseEntity·V1 마이그레이션, ./mvnw test(V1 적용 + ddl-auto validate) 통과, 개발 DB에서 제약 동작 확인"
+  - artifact: 5-IM-04
+    version: "1.0"
+    event: requested
+    by: 설동혁 (AA)
+    at: 2026-10-27 15:05
+  - artifact: 5-IM-04
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 15:06
+    tier: build
+    self_approval: true
+    note: "커밋 c8419f0 — 프로젝트 구현 모듈 3종(AuthFilter·공통 예외/응답·공통 로깅) + 포트 LoginUserLookup 선언, ./mvnw test 33개 통과, 기동 후 401·CORS·요청 ID·로그 형식 확인"
