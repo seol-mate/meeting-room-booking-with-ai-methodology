@@ -492,3 +492,29 @@ events:
     at: 2026-10-27 17:30
     tier: interim
     note: "커밋 a9f7658 — 수정 제안 1건(로그아웃 operation) 기각(설동혁 PL 2026-10-27), 점검 대상 해시 변동 없음"
+  - artifact: 5-IM-23-O1-reservation
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:00
+  - artifact: 5-IM-23-O1-reservation
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:01
+    tier: design
+    self_approval: true
+    note: "커밋 8e3958b — 필수 키·req 일치·TE 추적·persistence 점검 통과(스크립트), 진입 해시는 5-IM-22 보고서와 일치"
+  - artifact: 5-IM-23-O1-meeting-room
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:00
+  - artifact: 5-IM-23-O1-meeting-room
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:01
+    tier: design
+    self_approval: true
+    note: "커밋 8e3958b — 필수 키·req 일치·TE 추적·persistence 점검 통과(스크립트), 진입 해시는 5-IM-22 보고서와 일치"
