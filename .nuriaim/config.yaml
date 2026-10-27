@@ -170,6 +170,9 @@ artifacts:
     - 4-DN-14-O2-meeting-room   # ERD 회의실 도메인
     - 4-DN-14-O2-reservation   # ERD 예약 도메인
     - 4-DN-31-O1   # 사이트맵
+    - 4-DN-21-O1   # 프로그램 목록
+    - 4-DN-21-O2   # 코드 정의서
+    - 4-DN-21-O3   # 공통 개발규칙
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.
