@@ -518,3 +518,29 @@ events:
     tier: design
     self_approval: true
     note: "커밋 8e3958b — 필수 키·req 일치·TE 추적·persistence 점검 통과(스크립트), 진입 해시는 5-IM-22 보고서와 일치"
+  - artifact: 5-IM-24-reservation
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:10
+  - artifact: 5-IM-24-reservation
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:11
+    tier: build
+    self_approval: true
+    note: "커밋 fe3b242 — 테스트 먼저(bce936f, Red 증적) 후 구현, ./mvnw test 82개 통과, @trace 누락·오류 0, 실서버 흐름 확인. 최종 명세서 정정 1.0.1 반영"
+  - artifact: 5-IM-24-meeting-room
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:10
+  - artifact: 5-IM-24-meeting-room
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:11
+    tier: build
+    self_approval: true
+    note: "커밋 fe3b242 — 테스트 먼저(bce936f, Red 증적) 후 구현, ./mvnw test 82개 통과, @trace 누락·오류 0, 실서버 흐름 확인. 최종 명세서 정정 1.0.1 반영"
