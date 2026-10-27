@@ -386,3 +386,16 @@ events:
     tier: design
     self_approval: true
     note: "커밋 2b77179"
+  - artifact: 5-IM-06
+    version: "1.0"
+    event: requested
+    by: 설동혁 (AA)
+    at: 2026-10-27 14:50
+  - artifact: 5-IM-06
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 14:51
+    tier: build
+    self_approval: true
+    note: "커밋 d04eda0 — 엔티티 3종·BaseEntity·V1 마이그레이션, ./mvnw test(V1 적용 + ddl-auto validate) 통과, 개발 DB에서 제약 동작 확인"
