@@ -373,3 +373,16 @@ events:
     tier: build
     self_approval: true
     note: "커밋 90fe7a8 — ./mvnw test(Testcontainers)·JaCoCo 리포트 통과, compose DB로 기동 후 Flyway 연결·/actuator/health UP 확인. 포트는 api 8081·db 5433(8080·5432 충돌)"
+  - artifact: 5-IM-05-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (AA)
+    at: 2026-10-27 14:50
+  - artifact: 5-IM-05-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 14:51
+    tier: design
+    self_approval: true
+    note: "커밋 2b77179"
