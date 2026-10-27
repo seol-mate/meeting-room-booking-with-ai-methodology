@@ -485,3 +485,10 @@ events:
     at: 2026-10-27 17:10
     tier: interim
     note: "커밋 ef0c65a — 점검 대상 해시 기록, 최초 점검 불일치 3건은 초안 정정 1.0.1로 해소"
+  - artifact: 5-IM-22-O1-reservation
+    version: "1.1"
+    event: declared
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:30
+    tier: interim
+    note: "커밋 a9f7658 — 수정 제안 1건(로그아웃 operation) 기각(설동혁 PL 2026-10-27), 점검 대상 해시 변동 없음"
