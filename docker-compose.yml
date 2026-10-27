@@ -1,0 +1,24 @@
+# 로컬 개발 DB. web·api 서비스는 배포 계획(7-DP-01)에서 추가한다.
+services:
+  db:
+    image: postgres:17
+    container_name: meetingroom-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-meetingroom}
+      POSTGRES_USER: ${DB_USERNAME:-meetingroom}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD를 .env에 설정하세요}
+      # UTF-8 + 한글 정렬(ICU ko-KR) — ERD-overview §1 「DB 로케일·콜레이션」
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale-provider=icu --icu-locale=ko-KR"
+      TZ: Asia/Seoul
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - meetingroom-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-meetingroom} -d ${DB_NAME:-meetingroom}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  meetingroom-db-data:
