@@ -276,3 +276,36 @@ events:
     at: 2026-10-27 13:41
     tier: design
     self_approval: true
+  - artifact: 4-DN-36-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (PL)
+    at: 2026-10-27 13:43
+  - artifact: 4-DN-36-O1
+    version: "1.0"
+    event: conditional
+    by: 설동혁 (PM)
+    at: 2026-10-27 13:44
+    tier: design
+    self_approval: true
+    conditions:
+      - id: C1
+        text: 회의 제목 필수 여부, 회의실 위치 표기 형식·수용 인원 필수 여부 확정 (4-DN-36-O1 §2 미확정 항목)
+        owner: 설동혁 (PM)
+        due: 5-IM-13 착수 전
+        blocks_downstream: false
+      - id: C2
+        text: 회의실 관리 담당자(ROOM_MANAGER) 지정 방식 확정
+        owner: 설동혁 (PM)
+        due: 5-IM-21 착수 전
+        blocks_downstream: false
+      - id: C3
+        text: 예약 가능 시간대(운영 시간), 세션 만료 시간·세션/토큰 방식 확정
+        owner: 설동혁 (PM)
+        due: 5-IM-13 착수 전
+        blocks_downstream: false
+      - id: C4
+        text: 로그아웃 요구사항 반영 여부 결정(요구사항 정의서 개정 필요 시 Scope 경로)
+        owner: 설동혁 (PM)
+        due: 5-IM-13 착수 전
+        blocks_downstream: false
