@@ -1,27 +1,43 @@
 {
   "compilerOptions": {
+    // 출력 JS 문법 수준(ES2017)
     "target": "ES2017",
+    // 사용할 내장 타입 정의 — 브라우저 DOM과 최신 ECMAScript
     "lib": ["dom", "dom.iterable", "esnext"],
+    // .js 파일도 프로젝트에 포함
     "allowJs": true,
+    // node_modules의 .d.ts 검사를 건너뛰어 속도를 높인다
     "skipLibCheck": true,
+    // 엄격 모드(strictNullChecks 등) 일괄 활성화
     "strict": true,
+    // 타입 검사만 하고 파일은 내보내지 않는다(변환은 Next가 담당)
     "noEmit": true,
+    // CommonJS 모듈의 default import 허용
     "esModuleInterop": true,
+    // import/export 문법을 그대로 둔다
     "module": "esnext",
+    // 번들러 방식으로 모듈 경로를 해석한다
     "moduleResolution": "bundler",
+    // .json 파일 import 허용
     "resolveJsonModule": true,
+    // 파일 단위로 변환 가능한 코드만 허용(번들러 호환)
     "isolatedModules": true,
+    // 새 JSX 변환 사용 — React import 없이 JSX 작성
     "jsx": "react-jsx",
+    // 증분 빌드 정보를 tsbuildinfo에 저장해 재검사 속도를 높인다
     "incremental": true,
+    // Next.js 타입 플러그인(라우트·세그먼트 설정 검사)
     "plugins": [
       {
         "name": "next"
       }
     ],
+    // import 별칭 — "@/lib/x" → "./src/lib/x"
     "paths": {
       "@/*": ["./src/*"]
     }
   },
+  // 타입 검사 대상(Next가 생성하는 라우트 타입 포함)
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -30,5 +46,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
+  // 검사 제외
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { fieldErrors, loginSchema, periodSchema, reservationFormSchema, roomFormSchema, signupSchema } from "./schemas";
 
-// @trace REQ-F-001 | SCR-RSV-001
+// @trace REQ-F-001 | SCR-RSV-001 V-SCR-RSV-001-01, V-SCR-RSV-001-02
 describe("loginSchema", () => {
   it("로그인 ID와 비밀번호가 비면 각각의 안내 문구를 돌려준다", () => {
     const result = loginSchema.safeParse({ loginId: " ", password: "" });
@@ -15,7 +15,7 @@ describe("loginSchema", () => {
   });
 });
 
-// @trace REQ-F-001 | SCR-RSV-002
+// @trace REQ-F-001 | SCR-RSV-002 V-SCR-RSV-002-01, V-SCR-RSV-002-02, V-SCR-RSV-002-03
 describe("signupSchema", () => {
   it("세 항목이 모두 필수다", () => {
     const result = signupSchema.safeParse({ loginId: "", name: "", password: "" });
@@ -24,7 +24,7 @@ describe("signupSchema", () => {
   });
 });
 
-// @trace REQ-F-003 | SCR-RSV-004
+// @trace REQ-F-003 | SCR-RSV-004 V-SCR-RSV-004-01
 describe("reservationFormSchema", () => {
   const valid = { meetingRoomId: 1, date: "2026-11-02", start: "09:00", end: "10:00", title: "" };
 
@@ -48,7 +48,7 @@ describe("reservationFormSchema", () => {
   });
 });
 
-// @trace REQ-F-007 | SCR-MTR-002
+// @trace REQ-F-007 | SCR-MTR-002 V-SCR-MTR-002-01, V-SCR-MTR-002-03
 describe("roomFormSchema", () => {
   const valid = { name: "회의실 C", location: "", capacity: "", equipment: "" };
 
@@ -69,7 +69,7 @@ describe("roomFormSchema", () => {
   });
 });
 
-// @trace REQ-F-008 | SCR-MTR-003
+// @trace REQ-F-008 | SCR-MTR-003 V-SCR-MTR-003-01
 describe("periodSchema", () => {
   it("시작일이 종료일보다 늦으면 기간 안내 문구로 실패한다", () => {
     const result = periodSchema.safeParse({ from: "2026-11-05", to: "2026-11-04" });
