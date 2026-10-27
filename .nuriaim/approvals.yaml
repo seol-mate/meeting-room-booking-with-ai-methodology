@@ -156,3 +156,27 @@ events:
     tier: baseline
     self_approval: true
     covers: [3-AN-09-O1@1.0]
+  - artifact: 4-DN-12-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (PL)
+    at: 2026-10-27 12:07
+  - artifact: 4-DN-12-O2
+    version: "1.0"
+    event: requested
+    by: 설동혁 (PL)
+    at: 2026-10-27 12:07
+  - artifact: 4-DN-12-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-27 12:08
+    tier: design
+    self_approval: true
+  - artifact: 4-DN-12-O2
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-27 12:08
+    tier: design
+    self_approval: true
