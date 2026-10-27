@@ -33,6 +33,16 @@ npm run dev                        # http://localhost:3000
 - API codegen: `npm run codegen:api`는 5-IM-12 API 명세서 확정 뒤 5-IM-14에서 처음 실행한다(스크립트만 등록돼 있다).
 - 골격 테스트(`src/store/app-store.test.ts`)는 `@trace — | skeleton`으로 표기돼 있으며 단위 테스트(6-TS-11) 분모에 들어가지 않는다.
 
+#### 전체 화면 통합 (5-IM-11)
+
+시안(4-DN-38)에 라우팅·상태·검증을 붙여 mock 데이터로 동작하는 프로토타입으로 통합했다. 확인서는 `docs/5-IM-11-O1 전체 화면 코드베이스.md`.
+
+- **구조**: 화면(`src/app`) → React Query 훅(`src/hooks`) → mock API(`src/mock/api.ts`). 5-IM-14에서 mock API 본문만 실제 호출로 바꾸고 `src/mock`을 걷어낸다.
+- **인증·권한**: `(app)/layout.tsx`의 `AuthGate`가 로그인 상태를 확인하고(미로그인·세션 만료는 `/login`으로), `admin/layout.tsx`의 `RoleGuard`가 관리 담당자만 통과시킨다.
+- **mock 계정**: `manager`(회의실 관리 담당자)와 `staff`(일반 사용자) — 비밀번호는 `src/mock/data.ts`. 데이터와 로그인은 브라우저 sessionStorage에 저장되며 탭을 닫으면 초기화된다.
+- **폼 검증**: Zod(`src/lib/schemas.ts`), 메시지는 `src/lib/messages.ts`(`4-DN-36-O1` message_key).
+- 알려진 안내: 개발 서버(`npm run dev`)가 Next.js 「즉시 탐색 검증」 Insight 1건을 표시한다 — 개발 모드 전용이며 빌드·동작에 영향이 없다.
+
 ### Backend (`backend/`)
 
 | 항목 | 값 |
