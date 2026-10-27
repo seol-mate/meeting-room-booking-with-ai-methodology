@@ -1,0 +1,62 @@
+# 5-IM-24 Red 실행 증적 — 구현 코드 없이 테스트만 있는 상태에서 ./mvnw -q test-compile (2026-10-27)
+# 컴파일 실패 = Red. 전체 오류 중 앞 60줄만 보관한다.
+[ERROR] COMPILATION ERROR : 
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/AdminReservationQueryServiceTest.java:[13,54] package com.example.meetingroom.domain.meetingroom.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/AdminReservationQueryServiceTest.java:[14,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/AdminReservationQueryServiceTest.java:[15,58] cannot find symbol
+  symbol:   class ReservationService
+  location: package com.example.meetingroom.domain.reservation.service
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/AdminReservationQueryServiceTest.java:[30,17] cannot find symbol
+  symbol:   class ReservationService
+  location: class com.example.meetingroom.domain.meetingroom.service.AdminReservationQueryServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/AdminReservationQueryServiceTest.java:[33,17] cannot find symbol
+  symbol:   class MeetingRoomService
+  location: class com.example.meetingroom.domain.meetingroom.service.AdminReservationQueryServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/AdminReservationQueryServiceTest.java:[38,17] cannot find symbol
+  symbol:   class AdminReservationQueryService
+  location: class com.example.meetingroom.domain.meetingroom.service.AdminReservationQueryServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[13,54] package com.example.meetingroom.domain.meetingroom.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[14,54] package com.example.meetingroom.domain.meetingroom.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[15,54] package com.example.meetingroom.domain.meetingroom.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[16,54] package com.example.meetingroom.domain.meetingroom.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[17,54] package com.example.meetingroom.domain.meetingroom.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[19,61] package com.example.meetingroom.domain.meetingroom.repository does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[38,17] cannot find symbol
+  symbol:   class MeetingRoomRepository
+  location: class com.example.meetingroom.domain.meetingroom.service.MeetingRoomServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/meetingroom/service/MeetingRoomServiceTest.java:[43,17] cannot find symbol
+  symbol:   class MeetingRoomService
+  location: class com.example.meetingroom.domain.meetingroom.service.MeetingRoomServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[13,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[14,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[15,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[16,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[19,61] package com.example.meetingroom.domain.reservation.repository does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[27,50] package org.springframework.security.crypto.bcrypt does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[28,52] package org.springframework.security.crypto.password does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[34,17] cannot find symbol
+  symbol:   class ReserverRepository
+  location: class com.example.meetingroom.domain.reservation.service.AccountServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[39,23] cannot find symbol
+  symbol:   class PasswordEncoder
+  location: class com.example.meetingroom.domain.reservation.service.AccountServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/AccountServiceTest.java:[41,17] cannot find symbol
+  symbol:   class AccountService
+  location: class com.example.meetingroom.domain.reservation.service.AccountServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[15,58] cannot find symbol
+  symbol:   class MeetingRoomService
+  location: package com.example.meetingroom.domain.meetingroom.service
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[16,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[17,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[18,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[19,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[20,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[21,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[22,54] package com.example.meetingroom.domain.reservation.dto does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[27,61] package com.example.meetingroom.domain.reservation.repository does not exist
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[54,17] cannot find symbol
+  symbol:   class ReservationRepository
+  location: class com.example.meetingroom.domain.reservation.service.ReservationServiceTest
+[ERROR] /C:/dev/meeting-room-booking/backend/src/test/java/com/example/meetingroom/domain/reservation/service/ReservationServiceTest.java:[57,17] cannot find symbol
+  symbol:   class MeetingRoomService
+  location: class com.example.meetingroom.domain.reservation.service.ReservationServiceTest
