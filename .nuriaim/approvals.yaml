@@ -648,3 +648,107 @@ events:
     tier: design
     self_approval: true
     note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-14-SCR-RSV-001
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-RSV-001
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-RSV-002
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-RSV-002
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-RSV-003
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-RSV-003
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-RSV-004
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-RSV-004
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-RSV-005
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-RSV-005
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-MTR-001
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-MTR-001
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-MTR-002
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-MTR-002
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 5-IM-14-SCR-MTR-003
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 17:32
+  - artifact: 5-IM-14-SCR-MTR-003
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 17:33
+    tier: build
+    self_approval: true
+    note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
