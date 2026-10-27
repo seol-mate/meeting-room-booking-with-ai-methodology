@@ -360,3 +360,16 @@ events:
     tier: design
     self_approval: true
     note: "확정 시점 커밋 c2079a9. 유형안 승인은 확장 뒤 사후 승인(확인서 §2)"
+  - artifact: 5-IM-01-BE
+    version: "1.0"
+    event: requested
+    by: 설동혁 (AA)
+    at: 2026-10-27 14:30
+  - artifact: 5-IM-01-BE
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 14:31
+    tier: build
+    self_approval: true
+    note: "커밋 90fe7a8 — ./mvnw test(Testcontainers)·JaCoCo 리포트 통과, compose DB로 기동 후 Flyway 연결·/actuator/health UP 확인. 포트는 api 8081·db 5433(8080·5432 충돌)"
