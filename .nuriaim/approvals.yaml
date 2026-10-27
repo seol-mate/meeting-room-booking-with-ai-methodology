@@ -132,3 +132,8 @@ events:
     tier: baseline
     self_approval: true
     covers: [3-AN-08-O1@1.0, 3-AN-08-O2@1.0]
+  - artifact: 3-AN
+    event: stage_passed
+    by: 설동혁 (PM)
+    at: 2026-10-27 11:54
+    note: "3-AN→4-DN 전환 판정. 대상 집합 확정: 3-AN-01-O1·3-AN-03-O1·3-AN-05-O1·3-AN-07-O1·3-AN-08-O1·3-AN-08-O2·3-AN-09-O1. 생략: an-02(RSK-05)·an-06(RSK-07). 해당 없음: an-04. 표시 남은 예외 승인 없음. 예외 진행(deviated) 1건: 3-AN 단계 일정 미정. 열린 blocks_downstream 조건 없음. 미종결: RSK-06(자기 승인 소급 확인 — 3-AN-09-O1은 다음 승인 covers 대기)"
