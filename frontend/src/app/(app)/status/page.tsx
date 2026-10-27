@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { StateEmpty, StateError, StateLoading } from "@/components/screen-state";
+import {
+  StateEmpty,
+  StateError,
+  StateLoading,
+} from "@/components/screen-state";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,14 +20,22 @@ import type { ReservationStatusItem } from "@/mock/api";
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 /** 표에 보일 시간 범위 — 기본 09:00~18:00이고, 그 밖의 예약이 있으면 넓힌다 */
-function hourRange(items: ReservationStatusItem[], date: string): [number, number] {
+function hourRange(
+  items: ReservationStatusItem[],
+  date: string,
+): [number, number] {
   let from = 9;
   let to = 18;
   for (const item of items) {
     const start = splitLocalDateTime(item.startAt);
     const end = splitLocalDateTime(item.endAt);
     from = Math.min(from, Number(start.time.slice(0, 2)));
-    const endHour = end.date === date ? Math.ceil(Number(end.time.slice(0, 2)) + Number(end.time.slice(3)) / 60) : 24;
+    const endHour =
+      end.date === date
+        ? Math.ceil(
+            Number(end.time.slice(0, 2)) + Number(end.time.slice(3)) / 60,
+          )
+        : 24;
     to = Math.max(to, endHour);
   }
   return [from, to];
@@ -57,8 +69,14 @@ function StatusView() {
   const slots = halfHours(fromHour, toHour);
 
   const itemAt = (meetingRoomId: number, slot: string) =>
-    items.find((i) => i.meetingRoomId === meetingRoomId && i.startAt <= `${date}T${slot}` && `${date}T${slot}` < i.endAt);
-  const label = (item: ReservationStatusItem) => `${item.reserverName}${item.title ? ` · ${item.title}` : ""}`;
+    items.find(
+      (i) =>
+        i.meetingRoomId === meetingRoomId &&
+        i.startAt <= `${date}T${slot}` &&
+        `${date}T${slot}` < i.endAt,
+    );
+  const label = (item: ReservationStatusItem) =>
+    `${item.reserverName}${item.title ? ` · ${item.title}` : ""}`;
 
   return (
     <>
@@ -75,7 +93,10 @@ function StatusView() {
               id="date"
               type="date"
               value={date}
-              onChange={(e) => e.target.value && router.replace(`/status?date=${e.target.value}`)}
+              onChange={(e) =>
+                e.target.value &&
+                router.replace(`/status?date=${e.target.value}`)
+              }
             />
           </div>
           <Button type="submit" variant="outline">
@@ -101,7 +122,11 @@ function StatusView() {
                     시간
                   </th>
                   {rooms.data.map((room) => (
-                    <th key={room.meetingRoomId} scope="col" className="border-b p-2 text-left">
+                    <th
+                      key={room.meetingRoomId}
+                      scope="col"
+                      className="border-b p-2 text-left"
+                    >
                       {room.name}
                     </th>
                   ))}
@@ -110,7 +135,10 @@ function StatusView() {
               <tbody>
                 {slots.map((slot) => (
                   <tr key={slot}>
-                    <th scope="row" className="border-b p-2 text-left font-normal text-muted-foreground">
+                    <th
+                      scope="row"
+                      className="border-b p-2 text-left font-normal text-muted-foreground"
+                    >
                       {slot}
                     </th>
                     {rooms.data.map((room) => {
@@ -118,9 +146,17 @@ function StatusView() {
                       return (
                         <td
                           key={room.meetingRoomId}
-                          className={hit ? "border-b bg-primary/10 p-2" : "border-b p-2 text-muted-foreground"}
+                          className={
+                            hit
+                              ? "border-b bg-primary/10 p-2"
+                              : "border-b p-2 text-muted-foreground"
+                          }
                         >
-                          {hit ? (hit.startAt === `${date}T${slot}` ? `예약됨 · ${label(hit)}` : "예약됨") : "비어 있음"}
+                          {hit
+                            ? hit.startAt === `${date}T${slot}`
+                              ? `예약됨 · ${label(hit)}`
+                              : "예약됨"
+                            : "비어 있음"}
                         </td>
                       );
                     })}
@@ -133,17 +169,25 @@ function StatusView() {
           {/* 모바일: 회의실별 예약 목록 */}
           <div className="space-y-4 md:hidden">
             {rooms.data.map((room) => {
-              const list = items.filter((i) => i.meetingRoomId === room.meetingRoomId);
+              const list = items.filter(
+                (i) => i.meetingRoomId === room.meetingRoomId,
+              );
               return (
-                <section key={room.meetingRoomId} className="rounded-lg border p-3">
+                <section
+                  key={room.meetingRoomId}
+                  className="rounded-lg border p-3"
+                >
                   <h2 className="mb-2 font-bold">{room.name}</h2>
                   {list.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">예약이 없습니다</p>
+                    <p className="text-sm text-muted-foreground">
+                      예약이 없습니다
+                    </p>
                   ) : (
                     <ul className="space-y-1 text-sm">
                       {list.map((i) => (
                         <li key={i.reservationId}>
-                          {splitLocalDateTime(i.startAt).time}~{splitLocalDateTime(i.endAt).time} · {label(i)}
+                          {splitLocalDateTime(i.startAt).time}~
+                          {splitLocalDateTime(i.endAt).time} · {label(i)}
                         </li>
                       ))}
                     </ul>

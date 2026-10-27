@@ -47,6 +47,75 @@ export default function MyReservationsPage() {
       </Button>
     ) : null;
 
+  /** 로딩 → 오류 → 빈 목록 → 목록 순으로 일찍 반환한다 */
+  function renderContent() {
+    if (reservations.isPending) {
+      return <StateLoading />;
+    }
+
+    if (reservations.isError) {
+      return <StateError onRetry={() => void reservations.refetch()} />;
+    }
+
+    if (reservations.data.length === 0) {
+      return <StateEmpty message={t("rsv.my.list.empty")} />;
+    }
+
+    return (
+      <>
+        <div className="hidden overflow-x-auto md:block">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>회의실</TableHead>
+                <TableHead>일시</TableHead>
+                <TableHead>회의 제목</TableHead>
+                <TableHead>상태</TableHead>
+                <TableHead className="text-right">관리</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {reservations.data.map((item) => (
+                <TableRow key={item.reservationId}>
+                  <TableCell>{item.meetingRoomName}</TableCell>
+                  <TableCell>{formatRange(item.startAt, item.endAt)}</TableCell>
+                  <TableCell>{item.title ?? "-"}</TableCell>
+                  <TableCell>
+                    <div className="flex flex-col items-start gap-1">
+                      <StatusBadge status={item.status} />
+                      {item.cancelledAt && (
+                        <span className="text-xs text-muted-foreground">{formatDateTime(item.cancelledAt)} 취소</span>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right">{cancelButton(item)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        {/* 모바일: 카드 목록, [취소]는 카드 하단 */}
+        <ul className="space-y-3 md:hidden">
+          {reservations.data.map((item) => (
+            <li key={item.reservationId} className="space-y-2 rounded-lg border p-3 text-sm">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold">{item.meetingRoomName}</span>
+                <StatusBadge status={item.status} />
+              </div>
+              <p>{formatRange(item.startAt, item.endAt)}</p>
+              {item.title && <p className="text-muted-foreground">{item.title}</p>}
+              {item.cancelledAt && (
+                <p className="text-xs text-muted-foreground">{formatDateTime(item.cancelledAt)} 취소</p>
+              )}
+              {cancelButton(item) && <div className="flex justify-end">{cancelButton(item)}</div>}
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  }
+
   return (
     <>
       <h1 className="mb-6 text-2xl font-bold">내 예약</h1>
@@ -55,65 +124,7 @@ export default function MyReservationsPage() {
           <AlertDescription>{notice}</AlertDescription>
         </Alert>
       )}
-      {reservations.isPending ? (
-        <StateLoading />
-      ) : reservations.isError ? (
-        <StateError onRetry={() => void reservations.refetch()} />
-      ) : reservations.data.length === 0 ? (
-        <StateEmpty message={t("rsv.my.list.empty")} />
-      ) : (
-        <>
-          <div className="hidden overflow-x-auto md:block">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>회의실</TableHead>
-                  <TableHead>일시</TableHead>
-                  <TableHead>회의 제목</TableHead>
-                  <TableHead>상태</TableHead>
-                  <TableHead className="text-right">관리</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {reservations.data.map((item) => (
-                  <TableRow key={item.reservationId}>
-                    <TableCell>{item.meetingRoomName}</TableCell>
-                    <TableCell>{formatRange(item.startAt, item.endAt)}</TableCell>
-                    <TableCell>{item.title ?? "-"}</TableCell>
-                    <TableCell>
-                      <div className="flex flex-col items-start gap-1">
-                        <StatusBadge status={item.status} />
-                        {item.cancelledAt && (
-                          <span className="text-xs text-muted-foreground">{formatDateTime(item.cancelledAt)} 취소</span>
-                        )}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-right">{cancelButton(item)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-
-          {/* 모바일: 카드 목록, [취소]는 카드 하단 */}
-          <ul className="space-y-3 md:hidden">
-            {reservations.data.map((item) => (
-              <li key={item.reservationId} className="space-y-2 rounded-lg border p-3 text-sm">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-bold">{item.meetingRoomName}</span>
-                  <StatusBadge status={item.status} />
-                </div>
-                <p>{formatRange(item.startAt, item.endAt)}</p>
-                {item.title && <p className="text-muted-foreground">{item.title}</p>}
-                {item.cancelledAt && (
-                  <p className="text-xs text-muted-foreground">{formatDateTime(item.cancelledAt)} 취소</p>
-                )}
-                {cancelButton(item) && <div className="flex justify-end">{cancelButton(item)}</div>}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      {renderContent()}
       <CancelDialog
         open={target !== null}
         message={t("rsv.my.cancel.confirm")}
