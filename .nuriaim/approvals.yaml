@@ -544,3 +544,107 @@ events:
     tier: build
     self_approval: true
     note: "커밋 fe3b242 — 테스트 먼저(bce936f, Red 증적) 후 구현, ./mvnw test 82개 통과, @trace 누락·오류 0, 실서버 흐름 확인. 최종 명세서 정정 1.0.1 반영"
+  - artifact: 5-IM-13-O1-SCR-RSV-001
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-RSV-001
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-RSV-002
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-RSV-002
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-RSV-003
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-RSV-003
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-RSV-004
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-RSV-004
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-RSV-005
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-RSV-005
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-MTR-001
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-MTR-001
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-MTR-002
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-MTR-002
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"
+  - artifact: 5-IM-13-O1-SCR-MTR-003
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-27 18:30
+  - artifact: 5-IM-13-O1-SCR-MTR-003
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-27 18:31
+    tier: design
+    self_approval: true
+    note: "커밋 aa76a22 — §1~§9, 라우트·REQ·message_key·endpoint·EX-ID 대조(스크립트) 통과"

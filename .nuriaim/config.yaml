@@ -193,6 +193,14 @@ artifacts:
     - 5-IM-23-O1-meeting-room  # Backend 최종 명세서(회의실)
     - 5-IM-24-reservation      # Backend 코드 구현(예약)
     - 5-IM-24-meeting-room     # Backend 코드 구현(회의실)
+    - 5-IM-13-O1-SCR-RSV-001
+    - 5-IM-13-O1-SCR-RSV-002
+    - 5-IM-13-O1-SCR-RSV-003
+    - 5-IM-13-O1-SCR-RSV-004
+    - 5-IM-13-O1-SCR-RSV-005
+    - 5-IM-13-O1-SCR-MTR-001
+    - 5-IM-13-O1-SCR-MTR-002
+    - 5-IM-13-O1-SCR-MTR-003   # 화면 명세서 8부
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.
