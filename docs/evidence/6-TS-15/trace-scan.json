@@ -1,0 +1,98 @@
+{
+  "scenarios": 8,
+  "tests": 8,
+  "untraced": 0,
+  "invalid": 0,
+  "details": [],
+  "list": [
+    {
+      "file": "meeting-room.spec.ts",
+      "title": "관리 담당자가 회의실을 등록하면 목록과 예약 화면에 나타난다",
+      "reqs": [
+        "REQ-F-007"
+      ],
+      "screens": [
+        "SCR-MTR-001",
+        "SCR-MTR-002",
+        "SCR-RSV-004"
+      ]
+    },
+    {
+      "file": "meeting-room.spec.ts",
+      "title": "일반 직원은 회의실 관리 화면에 들어갈 수 없다",
+      "reqs": [
+        "REQ-F-007"
+      ],
+      "screens": [
+        "SCR-MTR-001"
+      ]
+    },
+    {
+      "file": "meeting-room.spec.ts",
+      "title": "로그인하지 않으면 보호 화면 대신 로그인 화면으로 이동한다",
+      "reqs": [
+        "REQ-NF-001"
+      ],
+      "screens": [
+        "SCR-RSV-003"
+      ]
+    },
+    {
+      "file": "reservation.spec.ts",
+      "title": "계정을 만들고 로그인하면 예약 현황이 열린다",
+      "reqs": [
+        "REQ-F-001",
+        "REQ-F-002"
+      ],
+      "screens": [
+        "SCR-RSV-002",
+        "SCR-RSV-001",
+        "SCR-RSV-003"
+      ]
+    },
+    {
+      "file": "reservation.spec.ts",
+      "title": "잘못된 비밀번호로는 로그인되지 않고 입력한 ID가 남는다",
+      "reqs": [
+        "REQ-F-001"
+      ],
+      "screens": [
+        "SCR-RSV-001"
+      ]
+    },
+    {
+      "file": "reservation.spec.ts",
+      "title": "회의실을 예약하면 내 예약과 예약 현황에 반영된다",
+      "reqs": [
+        "REQ-F-003",
+        "REQ-F-002"
+      ],
+      "screens": [
+        "SCR-RSV-004",
+        "SCR-RSV-005",
+        "SCR-RSV-003"
+      ]
+    },
+    {
+      "file": "reservation.spec.ts",
+      "title": "겹치는 시간은 예약되지 않고 이미 예약됨을 안내한다",
+      "reqs": [
+        "REQ-F-004"
+      ],
+      "screens": [
+        "SCR-RSV-004"
+      ]
+    },
+    {
+      "file": "reservation.spec.ts",
+      "title": "내 예약을 취소하면 취소됨으로 남고 그 시간은 현황에서 비어 있다",
+      "reqs": [
+        "REQ-F-005"
+      ],
+      "screens": [
+        "SCR-RSV-005",
+        "SCR-RSV-003"
+      ]
+    }
+  ]
+}

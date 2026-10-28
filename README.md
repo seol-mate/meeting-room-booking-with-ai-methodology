@@ -90,6 +90,18 @@ mock을 걷어내고 8개 화면을 백엔드 API에 결선했다. 구조: 화�
 
 해당 없음 — 시스템 아키텍처 정의서(`4-DN-01-O1`) §8.1 공통 모듈 목록(소프트웨어 아키텍처 정의서 4-DN-03 생략)에 제공 주체가 `제품 제공`인 모듈이 없다(인증 필터·공통 예외 처리·공통 로깅 모두 `프로젝트 구현`, 5-IM-04에서 구현). 솔루션·프레임워크 제공 기능이 없는 프로젝트라 설정·활성화할 대상이 없다(2026-10-28).
 
+#### E2E 자동화 테스트 (6-TS-15)
+
+Playwright 시나리오 8건(`frontend/e2e/`)이 실제 Backend·DB에 붙어 가입·로그인, 예약 등록·겹침 거부·취소, 회의실 등록, 접근 차단을 검증한다. CI가 없어(5-IM-02 생략, RSK-13) 로컬 스크립트로 실행한다.
+
+```bash
+# DB(docker compose) · Backend(8081) · Frontend 개발 서버(3000)를 띄운 뒤
+bash scripts/e2e.sh        # 결과: docs/evidence/6-TS-15/
+node scripts/e2e-trace-scan.mjs   # @trace REQ-ID 검증
+```
+
+회의실 관리 담당자 계정이 필요하다(생성 수단 미정 — 조건 C2): 가입한 뒤 `update reserver set role='ROOM_MANAGER' where login_id='…'`로 올리고 `E2E_MANAGER_ID`·`E2E_MANAGER_PASSWORD`로 알려 준다(기본 `e2eprobe`/`x`).
+
 ### Backend (`backend/`)
 
 | 항목 | 값 |

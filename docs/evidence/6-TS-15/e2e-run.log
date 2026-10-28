@@ -1,0 +1,13 @@
+
+Running 8 tests using 2 workers
+
+  ok 1 e2e\meeting-room.spec.ts:26:7 › 회의실 도메인·접근 차단 E2E › 일반 직원은 회의실 관리 화면에 들어갈 수 없다 (2.7s)
+  ok 2 e2e\meeting-room.spec.ts:6:7 › 회의실 도메인·접근 차단 E2E › 관리 담당자가 회의실을 등록하면 목록과 예약 화면에 나타난다 (3.8s)
+  ok 3 e2e\meeting-room.spec.ts:38:7 › 회의실 도메인·접근 차단 E2E › 로그인하지 않으면 보호 화면 대신 로그인 화면으로 이동한다 (1.6s)
+  ok 5 e2e\reservation.spec.ts:28:7 › 예약 도메인 E2E › 잘못된 비밀번호로는 로그인되지 않고 입력한 ID가 남는다 (1.3s)
+  ok 4 e2e\reservation.spec.ts:6:7 › 예약 도메인 E2E › 계정을 만들고 로그인하면 예약 현황이 열린다 (2.3s)
+  ok 7 e2e\reservation.spec.ts:68:7 › 예약 도메인 E2E › 겹치는 시간은 예약되지 않고 이미 예약됨을 안내한다 (2.9s)
+  ok 6 e2e\reservation.spec.ts:42:7 › 예약 도메인 E2E › 회의실을 예약하면 내 예약과 예약 현황에 반영된다 (4.3s)
+  ok 8 e2e\reservation.spec.ts:90:7 › 예약 도메인 E2E › 내 예약을 취소하면 취소됨으로 남고 그 시간은 현황에서 비어 있다 (3.2s)
+
+  8 passed (13.4s)

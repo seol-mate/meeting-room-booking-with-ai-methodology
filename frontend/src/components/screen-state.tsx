@@ -48,7 +48,7 @@ export function StateError({ message, onRetry }: { message?: string; onRetry?: (
 export function StateForbidden() {
   const router = useRouter();
   return (
-    <div className="flex flex-col items-center gap-3 py-16 text-center" role="alert">
+    <div className="flex flex-col items-center gap-3 py-16 text-center" role="alert" data-testid="forbidden">
       <p>{t("common.state.forbidden")}</p>
       <Button type="button" variant="outline" onClick={() => router.back()}>
         이전 화면
