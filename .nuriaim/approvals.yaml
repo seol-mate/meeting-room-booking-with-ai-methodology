@@ -830,3 +830,16 @@ events:
     tier: build
     self_approval: true
     note: "커밋 9fbd12d — Playwright 8건 8/8 Pass(병렬·단일 워커), trace-scan 지어낸 ID 0, 계획 §6 E2E ✓ REQ 7/7. 예외: ① 5-IM-02 생략(RSK-13)으로 CI e2e 스테이지 대신 scripts/e2e.sh 로컬 실행 로그로 갈음(진입 조건·ts-15.P3 PM 판단) ② 개발 DB 사용·데이터 누적 ③ 서버 mode=check 판정 미실시(자체 대조)"
+  - artifact: 7-DP-01-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (TA)
+    at: 2026-10-28 14:10
+  - artifact: 7-DP-01-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-28 14:11
+    tier: baseline
+    self_approval: true
+    note: "커밋 beefa01 — 조건부 승인: 진입 조건의 UAT 결과서(6-TS-21-O1)는 UAT 생략(RSK-15)으로 없고 발주처 부재(RSK-01)라 인수 확인도 없다. 게이트 dp-01.P6·B1의 UAT 항목은 판정 불가로 보고 시스템 테스트 결과서(6-TS-13-O1) 등을 대체 근거로 PM이 수용한다(예외 승인, 인수 아님). 서버 mode=check 판정 미실시(자체 대조)"
