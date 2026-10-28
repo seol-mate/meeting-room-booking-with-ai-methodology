@@ -752,3 +752,16 @@ events:
     tier: build
     self_approval: true
     note: "커밋 6b393fb — 테스트 먼저(0397630, Red 증적) 후 구현, npm test 13파일 127개 통과, typecheck·lint·build 통과, F/V/UX 122개 ID·REQ 전부 @trace, 실서버(프록시 /api/v1) 흐름 확인, mock 제거"
+  - artifact: 6-TS-01-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (QA)
+    at: 2026-10-28 10:10
+  - artifact: 6-TS-01-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-28 10:12
+    tier: baseline
+    self_approval: true
+    note: "커밋 24424e6 — §6 REQ 매핑이 요구사항 정의서 기능 8건+비기능 1건과 일치(스크립트 대조). 예외 사항: ① 진입 조건 5-IM-02 확정은 생략(RSK-13)이라 PM 판단으로 갈음 ② 킥오프(3-AN-02) 생략·발주처 부재로 §5.6 UAT 확인자·서명자는 설동혁 자체 인수(RSK-06) — 게이트 ts-01.P6의 §7·§7.0 인용 불가 ③ 서버 mode=check 판정은 미실시(자체 대조). 환경 차이는 RSK-14로 등재"

@@ -209,6 +209,7 @@ artifacts:
     - 5-IM-14-SCR-MTR-001
     - 5-IM-14-SCR-MTR-002
     - 5-IM-14-SCR-MTR-003   # Frontend 코드 구현 8화면
+    - 6-TS-01-O1   # 테스트 계획서
   pending_reapproval: []
   out_of_scope: []
   # 플랫폼을 쓰는 프로젝트는 세 목록을 비워 둔다 — 서버가 플랫폼 원장에서 상태를 조회한다.
