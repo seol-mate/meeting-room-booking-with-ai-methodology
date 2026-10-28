@@ -843,3 +843,16 @@ events:
     tier: baseline
     self_approval: true
     note: "커밋 beefa01 — 조건부 승인: 진입 조건의 UAT 결과서(6-TS-21-O1)는 UAT 생략(RSK-15)으로 없고 발주처 부재(RSK-01)라 인수 확인도 없다. 게이트 dp-01.P6·B1의 UAT 항목은 판정 불가로 보고 시스템 테스트 결과서(6-TS-13-O1) 등을 대체 근거로 PM이 수용한다(예외 승인, 인수 아님). 서버 mode=check 판정 미실시(자체 대조)"
+  - artifact: 7-DP-02-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (TA)
+    at: 2026-10-28 14:10
+  - artifact: 7-DP-02-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-28 14:12
+    tier: build
+    self_approval: true
+    note: "커밋 bd4c1b7 — compose 3개 서비스 healthy 확인(헬스·DB·프록시 경유 401), Flyway V1 적용, 비루트 실행, 평문 비밀 0건, 검증 스택 down -v. 대체 완료 7건(개인 PC라 호스트명·NTP·SSL·SSH·로그 디렉터리 등)은 사유 기재. 서버 mode=check 판정 미실시(자체 대조). 4-DN-01-O1 1.0.1 정정 포함"
