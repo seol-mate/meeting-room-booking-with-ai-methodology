@@ -17,16 +17,17 @@ import { fieldErrors, loginSchema } from "@/lib/schemas";
 function LoginView() {
   const router = useRouter();
   const params = useSearchParams();
-  const { data: me, isPending } = useMe();
+  const { data: me, error: meError, isPending } = useMe();
   const login = useLogin();
   const [values, setValues] = useState({ loginId: "", password: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [failure, setFailure] = useState<string | null>(null);
 
   // 이미 로그인한 사용자는 예약 현황으로 보낸다 (C-RSV-LGN-001)
+  // 갱신이 401로 실패하면 이전 data가 남아 있어도 보내지 않는다 — AuthGate와 서로 되돌려 보내는 무한 이동을 막는다
   useEffect(() => {
-    if (me) router.replace("/status");
-  }, [me, router]);
+    if (me && !meError) router.replace("/status");
+  }, [me, meError, router]);
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault();
