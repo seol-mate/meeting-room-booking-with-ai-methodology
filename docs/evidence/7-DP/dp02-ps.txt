@@ -1,0 +1,3 @@
+meetingroom-prod-api Up 54 seconds (healthy)
+meetingroom-prod-db Up About a minute (healthy)
+meetingroom-prod-web Up 43 seconds (healthy)
