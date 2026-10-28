@@ -791,3 +791,16 @@ events:
     tier: build
     self_approval: true
     note: "커밋 76be5a1 — 단위 216건 Pass(BE 80·FE 136), BE business 100%·domain 85.6%, FE business 96.8%, @trace 누락 0, 기대사항 BE 19/19·FE 122/122, 보완 테스트 23건 DV 검토. 서버 mode=check 판정 미실시(자체 대조)"
+  - artifact: 6-TS-12-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-28 11:40
+  - artifact: 6-TS-12-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (QA)
+    at: 2026-10-28 11:41
+    tier: verdict
+    self_approval: true
+    note: "커밋 356bf75 — 통합 17건 Pass(Testcontainers PostgreSQL 17), presentation 82.2%, 질의 메서드 9개 전부 실행, TE-I 10/10, 엔드포인트 13/13. 추가 시나리오 3건(오류 2·롤백 1). 서버 mode=check 판정 미실시(자체 대조)"
