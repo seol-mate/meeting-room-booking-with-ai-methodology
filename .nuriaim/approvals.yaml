@@ -804,3 +804,16 @@ events:
     tier: verdict
     self_approval: true
     note: "커밋 356bf75 — 통합 17건 Pass(Testcontainers PostgreSQL 17), presentation 82.2%, 질의 메서드 9개 전부 실행, TE-I 10/10, 엔드포인트 13/13. 추가 시나리오 3건(오류 2·롤백 1). 서버 mode=check 판정 미실시(자체 대조)"
+  - artifact: 6-TS-13-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (QA)
+    at: 2026-10-28 12:30
+  - artifact: 6-TS-13-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (QA)
+    at: 2026-10-28 12:31
+    tier: verdict
+    self_approval: true
+    note: "커밋 d2e58b8 — 수동 실행 57건(Pass 56·미실시 1: EX-RSV-06 회의실 없음, FE 단위 테스트로 갈음), 수용 기준 17/17·EX 18/18 케이스, 결함 0. 작성자=승인자(1인 팀, RSK-06). 스크린리더·키보드 초점 미점검은 UAT 이관 위험으로 결과서 §6에 기록"
