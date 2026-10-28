@@ -37,6 +37,20 @@ class PageParamsTest {
 	}
 
 	@Test
+	void toPageable_withSortAndNoDirection_sortsAscending() {
+		Pageable pageable = PageParams.toPageable(1, 20, "name", null, SORTABLE);
+
+		assertThat(pageable.getSort().getOrderFor("name").getDirection()).isEqualTo(Sort.Direction.ASC);
+	}
+
+	@Test
+	void toPageable_withLowercaseAsc_sortsAscending() {
+		Pageable pageable = PageParams.toPageable(1, 20, "name", "asc", SORTABLE);
+
+		assertThat(pageable.getSort().getOrderFor("name").getDirection()).isEqualTo(Sort.Direction.ASC);
+	}
+
+	@Test
 	void toPageable_withSizeOver100_throwsBadRequest() {
 		assertBadRequest(() -> PageParams.toPageable(1, 101, null, null, SORTABLE));
 	}

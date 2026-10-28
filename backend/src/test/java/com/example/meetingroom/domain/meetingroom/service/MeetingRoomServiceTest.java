@@ -137,6 +137,20 @@ class MeetingRoomServiceTest {
 		assertThat(catchBusiness(() -> service.findOne(1L)).getErrorCode()).isEqualTo(ErrorCode.FORBIDDEN);
 	}
 
+	// @trace REQ-F-007 | TE-meeting-room-U03, meeting-room-003
+	@Test
+	void findOne_asManager_returnsRoomFields() {
+		when(currentUserProvider.require()).thenReturn(MANAGER);
+		when(repository.findById(1L)).thenReturn(Optional.of(new MeetingRoomEntity("회의실 A", "본관 3층", 8, "모니터")));
+
+		MeetingRoomItemResponse response = service.findOne(1L);
+
+		assertThat(response.name()).isEqualTo("회의실 A");
+		assertThat(response.location()).isEqualTo("본관 3층");
+		assertThat(response.capacity()).isEqualTo(8);
+		assertThat(response.equipment()).isEqualTo("모니터");
+	}
+
 	// @trace REQ-F-002 | TE-meeting-room-U04, meeting-room-001
 	@Test
 	void findAll_asUser_returnsRepositoryOrder() {
@@ -177,5 +191,14 @@ class MeetingRoomServiceTest {
 		assertThat(service.findNamesByIds(Set.of(1L, 99L))).isEqualTo(Map.of(1L, "회의실 A"));
 		assertThat(service.findNamesByIds(Set.of())).isEmpty();
 		verify(repository).findNameRows(Set.of(1L, 99L));
+	}
+
+	// @trace REQ-F-005 | TE-meeting-room-U06
+	@Test
+	void findNamesByIds_withDuplicateRows_keepsFirstName() {
+		when(repository.findNameRows(any())).thenReturn(List.of(
+				new MeetingRoomNameRow(1L, "회의실 A"), new MeetingRoomNameRow(1L, "회의실 A (중복 행)")));
+
+		assertThat(service.findNamesByIds(Set.of(1L))).isEqualTo(Map.of(1L, "회의실 A"));
 	}
 }

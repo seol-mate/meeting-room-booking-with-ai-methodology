@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { addDays, formatRange, halfHours, isValidReservationPeriod, minutesBetween } from "./time";
 
-// @trace REQ-F-003 | SCR-RSV-004
+// @trace REQ-F-003 | SCR-RSV-004 V-SCR-RSV-004-01
 describe("예약 시간 규칙", () => {
   it.each([
     ["2026-11-02T09:00", "2026-11-02T09:30", true],

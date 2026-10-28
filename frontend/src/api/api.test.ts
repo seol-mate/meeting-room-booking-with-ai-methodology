@@ -146,3 +146,39 @@ describe("API 계층 — 응답과 오류", () => {
     await expect(reservationApi.me()).rejects.toThrow();
   });
 });
+
+describe("API 계층 — 회의실 목록·상세·등록", () => {
+  const room = { meetingRoomId: 1, name: "A", location: null, capacity: null, equipment: null };
+
+  // @trace REQ-F-002 | SCR-RSV-003 F-SCR-RSV-003-02
+  it("회의실 목록은 GET api/v1/meeting-rooms를 호출한다", async () => {
+    reply = ok([room]);
+
+    const rooms = await meetingRoomApi.listRooms();
+
+    expect(last?.method).toBe("get");
+    expect(last?.url).toBe("api/v1/meeting-rooms");
+    expect(rooms).toEqual([room]);
+  });
+
+  // @trace REQ-F-007 | SCR-MTR-002 F-SCR-MTR-002-02
+  it("회의실 상세는 GET api/v1/meeting-rooms/{id}를 호출한다", async () => {
+    reply = ok(room);
+
+    await meetingRoomApi.getRoom(1);
+
+    expect(last?.method).toBe("get");
+    expect(last?.url).toBe("api/v1/meeting-rooms/1");
+  });
+
+  // @trace REQ-F-007 | SCR-MTR-002 F-SCR-MTR-002-04
+  it("회의실 등록은 POST api/v1/meeting-rooms로 네 항목을 보낸다", async () => {
+    reply = ok(room, 201);
+
+    await meetingRoomApi.createRoom({ name: "A", location: null, capacity: null, equipment: null });
+
+    expect(last?.method).toBe("post");
+    expect(last?.url).toBe("api/v1/meeting-rooms");
+    expect(JSON.parse(last?.data)).toEqual({ name: "A", location: null, capacity: null, equipment: null });
+  });
+});

@@ -6,14 +6,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.meetingroom.common.envelope.EnvelopeFactory;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
+import jakarta.validation.Validation;
 import jakarta.validation.constraints.NotBlank;
 import java.sql.SQLException;
 import java.time.Clock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,6 +83,30 @@ class GlobalExceptionHandlerTest {
 	}
 
 	@Test
+	void constraintViolation_returns400WithLastPathSegmentAsField() throws Exception {
+		mockMvc.perform(get("/probe/constraint"))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.error.code").value("ERR-4000"))
+				.andExpect(jsonPath("$.error.errors[0].field").value("name"))
+				.andExpect(jsonPath("$.error.errors[0].reason").isNotEmpty());
+	}
+
+	@Test
+	void notFoundStatusException_returns404WithNotFoundCode() throws Exception {
+		mockMvc.perform(get("/probe/not-found"))
+				.andExpect(status().isNotFound())
+				.andExpect(jsonPath("$.error.code").value("ERR-4040"));
+	}
+
+	@Test
+	void serverErrorStatusException_returns500WithoutInternalDetails() throws Exception {
+		mockMvc.perform(get("/probe/server-error"))
+				.andExpect(status().isInternalServerError())
+				.andExpect(jsonPath("$.error.code").value("ERR-5000"))
+				.andExpect(jsonPath("$.error.message").value(ErrorCode.INTERNAL.getDefaultMessage()));
+	}
+
+	@Test
 	void unexpectedException_returns500WithoutInternalDetails() throws Exception {
 		mockMvc.perform(get("/probe/boom"))
 				.andExpect(status().isInternalServerError())
@@ -115,6 +143,22 @@ class GlobalExceptionHandlerTest {
 		@GetMapping("/probe/integrity")
 		String integrity() {
 			throw new DataIntegrityViolationException("널 위반", new SQLException("null", "23502"));
+		}
+
+		@GetMapping("/probe/constraint")
+		String constraint() {
+			throw new ConstraintViolationException(
+					Validation.buildDefaultValidatorFactory().getValidator().validate(new Body("")));
+		}
+
+		@GetMapping("/probe/not-found")
+		String notFound() {
+			throw new ErrorResponseException(HttpStatus.NOT_FOUND);
+		}
+
+		@GetMapping("/probe/server-error")
+		String serverError() {
+			throw new ErrorResponseException(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		@GetMapping("/probe/boom")
