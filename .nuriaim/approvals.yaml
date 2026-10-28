@@ -765,3 +765,29 @@ events:
     tier: baseline
     self_approval: true
     note: "커밋 24424e6 — §6 REQ 매핑이 요구사항 정의서 기능 8건+비기능 1건과 일치(스크립트 대조). 예외 사항: ① 진입 조건 5-IM-02 확정은 생략(RSK-13)이라 PM 판단으로 갈음 ② 킥오프(3-AN-02) 생략·발주처 부재로 §5.6 UAT 확인자·서명자는 설동혁 자체 인수(RSK-06) — 게이트 ts-01.P6의 §7·§7.0 인용 불가 ③ 서버 mode=check 판정은 미실시(자체 대조). 환경 차이는 RSK-14로 등재"
+  - artifact: 6-TS-01-O1
+    version: "1.0.1"
+    event: requested
+    by: 설동혁 (QA)
+    at: 2026-10-28 11:05
+  - artifact: 6-TS-01-O1
+    version: "1.0.1"
+    event: approved
+    by: 설동혁 (PM)
+    at: 2026-10-28 11:06
+    tier: baseline
+    self_approval: true
+    note: "커밋 76be5a1 — §5.1 계층 대응 보완(common/util=domain, dto=presentation, common/config·기동 클래스 판정 제외). 합격 기준 수치 변경 없음"
+  - artifact: 6-TS-11-O1
+    version: "1.0"
+    event: requested
+    by: 설동혁 (DV)
+    at: 2026-10-28 11:05
+  - artifact: 6-TS-11-O1
+    version: "1.0"
+    event: approved
+    by: 설동혁 (PL)
+    at: 2026-10-28 11:06
+    tier: build
+    self_approval: true
+    note: "커밋 76be5a1 — 단위 216건 Pass(BE 80·FE 136), BE business 100%·domain 85.6%, FE business 96.8%, @trace 누락 0, 기대사항 BE 19/19·FE 122/122, 보완 테스트 23건 DV 검토. 서버 mode=check 판정 미실시(자체 대조)"
