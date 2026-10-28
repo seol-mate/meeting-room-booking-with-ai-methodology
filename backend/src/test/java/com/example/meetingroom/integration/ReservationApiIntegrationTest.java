@@ -147,6 +147,38 @@ class ReservationApiIntegrationTest extends IntegrationTestSupport {
 				.isEqualTo(ReservationStatus.RESERVED);
 	}
 
+	// @trace REQ-F-003, REQ-F-004 | reservation-006 (추가 — 오류 케이스: 거부된 등록은 DB 상태를 바꾸지 않는다)
+	@Test
+	void create_rejected_leavesReservationsUnchanged() throws Exception {
+		saveReservation(roomA, manager, DAY.withHour(9), DAY.withHour(11), "기존");
+		MockHttpSession session = login("staff");
+		long before = reservations.count();
+
+		mockMvc.perform(post("/api/v1/reservations").session(session).contentType(MediaType.APPLICATION_JSON)
+				.content(createBody(roomA.getMeetingRoomId(), "2030-01-02T10:00", "2030-01-02T10:30", "겹침")))
+				.andExpect(status().isConflict());
+		mockMvc.perform(post("/api/v1/reservations").session(session).contentType(MediaType.APPLICATION_JSON)
+				.content(createBody(roomA.getMeetingRoomId(), "2030-01-02T13:00", "2030-01-02T19:00", "6시간")))
+				.andExpect(status().isUnprocessableContent());
+
+		assertThat(reservations.count()).isEqualTo(before);
+	}
+
+	// @trace REQ-F-006 | reservation-008 (추가 — 오류 케이스: 거부된 취소는 예약 상태를 바꾸지 않는다)
+	@Test
+	void cancel_forbidden_leavesReservationUnchanged() throws Exception {
+		ReservationEntity others = saveReservation(roomA, manager, DAY.withHour(9), DAY.withHour(10), "남의 회의");
+		MockHttpSession session = login("staff");
+
+		mockMvc.perform(patch("/api/v1/reservations/{id}/cancel", others.getReservationId()).session(session))
+				.andExpect(status().isForbidden());
+
+		ReservationEntity after = reservations.findById(others.getReservationId()).orElseThrow();
+		assertThat(after.getStatus()).isEqualTo(ReservationStatus.RESERVED);
+		assertThat(after.getCancelledAt()).isNull();
+		assertThat(after.getCancelledBy()).isNull();
+	}
+
 	// @trace REQ-F-002 | TE-reservation-I05, reservation-005
 	@Test
 	void status_filtersByDateAndRoom_excludesCancelled_masksTitle() throws Exception {

@@ -1,0 +1,233 @@
+10:30:10.010 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.meetingroom.integration.AuthApiIntegrationTest]: AuthApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:30:10.377 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.AuthApiIntegrationTest
+10:30:10.589 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.meetingroom.integration.AuthApiIntegrationTest]: AuthApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:30:10.589 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.meetingroom.integration.IntegrationTestSupport]: IntegrationTestSupport does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+10:30:10.601 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.AuthApiIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-28T10:30:11.274+09:00 [INFO ] [] [AuthApiIntegrationTest.logStarting] Starting AuthApiIntegrationTest using Java 25.0.4.1 with PID 29824 (started by seol0 in C:\dev\meeting-room-booking\backend)
+2026-10-28T10:30:11.277+09:00 [INFO ] [] [AuthApiIntegrationTest.logStartupProfileInfo] No active profile set, falling back to 1 default profile: "default"
+2026-10-28T10:30:14.359+09:00 [INFO ] [] [RepositoryConfigurationDelegate.registerRepositoriesIn] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-28T10:30:14.634+09:00 [INFO ] [] [RepositoryConfigurationDelegate.registerRepositoriesIn] Finished Spring Data repository scanning in 246 ms. Found 3 JPA repository interfaces.
+2026-10-28T10:30:16.769+09:00 [INFO ] [] [PullPolicy.defaultPolicy] Image pull policy will be performed by: DefaultPullPolicy()
+2026-10-28T10:30:16.779+09:00 [INFO ] [] [ImageNameSubstitutor.instance] Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2026-10-28T10:30:16.936+09:00 [INFO ] [] [DockerClientFactory.getOrInitializeStrategy] Testcontainers version: 2.0.5
+2026-10-28T10:30:18.041+09:00 [INFO ] [] [DockerClientProviderStrategy.lambda$loadConfiguredStrategy$9] Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-10-28T10:30:19.548+09:00 [INFO ] [] [DockerClientProviderStrategy.tryOutStrategy] Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2026-10-28T10:30:19.553+09:00 [INFO ] [] [DockerClientFactory.client] Docker host IP address is localhost
+2026-10-28T10:30:19.603+09:00 [INFO ] [] [DockerClientFactory.client] Connected to docker: 
+  Server Version: 28.0.4
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 15863 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2026-10-28T10:30:19.905+09:00 [INFO ] [] [0.tryStart] Creating container for image: testcontainers/ryuk:0.14.0
+2026-10-28T10:30:20.151+09:00 [INFO ] [] [RegistryAuthLocator.runCredentialProvider] Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+2026-10-28T10:30:20.701+09:00 [INFO ] [] [0.tryStart] Container testcontainers/ryuk:0.14.0 is starting: 261d58600d48b2d28f700f6dd87d1e0f7bce1288e8f002578bad8df46b2ab525
+2026-10-28T10:30:21.340+09:00 [INFO ] [] [0.tryStart] Container testcontainers/ryuk:0.14.0 started in PT1.4350369S
+2026-10-28T10:30:21.364+09:00 [INFO ] [] [RyukResourceReaper.init] Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-10-28T10:30:21.365+09:00 [INFO ] [] [DockerClientFactory.client] Checking the system...
+2026-10-28T10:30:21.368+09:00 [INFO ] [] [DockerClientFactory.check] ✔︎ Docker server version should be at least 1.6.0
+2026-10-28T10:30:21.369+09:00 [INFO ] [] [postgres:17.tryStart] Creating container for image: postgres:17
+2026-10-28T10:30:21.463+09:00 [INFO ] [] [postgres:17.tryStart] Container postgres:17 is starting: 774390de822a517b64cac75791d9463792679bfbb0ae4321e9d61560f2e9e20f
+2026-10-28T10:30:22.658+09:00 [INFO ] [] [postgres:17.tryStart] Container postgres:17 started in PT1.288356S
+2026-10-28T10:30:22.660+09:00 [INFO ] [] [postgres:17.containerIsStarted] Container is started (JDBC URL: jdbc:postgresql://localhost:13287/test?loggerLevel=OFF)
+2026-10-28T10:30:24.339+09:00 [INFO ] [] [FlywayExecutor.info] Database: jdbc:postgresql://localhost:13287/test?loggerLevel=OFF (PostgreSQL 17.11)
+2026-10-28T10:30:24.507+09:00 [INFO ] [] [JdbcTableSchemaHistory.info] Schema history table "public"."flyway_schema_history" does not exist yet
+2026-10-28T10:30:24.515+09:00 [INFO ] [] [DbValidate.info] Successfully validated 1 migration (execution time 00:00.045s)
+2026-10-28T10:30:24.543+09:00 [INFO ] [] [JdbcTableSchemaHistory.info] Creating Schema History table "public"."flyway_schema_history" ...
+2026-10-28T10:30:24.650+09:00 [INFO ] [] [DbMigrate.info] Current version of schema "public": << Empty Schema >>
+2026-10-28T10:30:24.685+09:00 [INFO ] [] [DbMigrate.info] Migrating schema "public" to version "1 - create initial tables"
+2026-10-28T10:30:24.776+09:00 [INFO ] [] [DbMigrate.info] Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.061s)
+2026-10-28T10:30:25.164+09:00 [INFO ] [] [jpa.logPersistenceUnitInformation] HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-28T10:30:25.467+09:00 [INFO ] [] [core.logVersion] HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-10-28T10:30:27.621+09:00 [INFO ] [] [SpringPersistenceUnitInfo.addTransformer] No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-28T10:30:27.803+09:00 [INFO ] [] [HikariDataSource.getConnection] HikariPool-1 - Starting...
+2026-10-28T10:30:27.871+09:00 [INFO ] [] [HikariPool.checkFailFast] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@53a1b32f
+2026-10-28T10:30:27.875+09:00 [INFO ] [] [HikariDataSource.getConnection] HikariPool-1 - Start completed.
+2026-10-28T10:30:28.090+09:00 [INFO ] [] [pooling.logConnectionInfo] HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:13287/test?loggerLevel=OFF]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.11
+	Default catalog/schema: test/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-28T10:30:32.608+09:00 [INFO ] [] [core.initiateService] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-28T10:30:32.779+09:00 [INFO ] [] [LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-28T10:30:33.334+09:00 [INFO ] [] [QueryEnhancerFactories.<clinit>] Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-28T10:30:39.227+09:00 [INFO ] [] [SpringBootMockServletContext.log] Initializing Spring TestDispatcherServlet ''
+2026-10-28T10:30:39.228+09:00 [INFO ] [] [TestDispatcherServlet.initServletBean] Initializing Servlet ''
+2026-10-28T10:30:39.241+09:00 [INFO ] [] [EndpointLinksResolver.<init>] Exposing 1 endpoint beneath base path '/actuator'
+2026-10-28T10:30:39.265+09:00 [INFO ] [] [TestDispatcherServlet.initServletBean] Completed initialization in 36 ms
+2026-10-28T10:30:39.459+09:00 [INFO ] [] [AuthApiIntegrationTest.logStarted] Started AuthApiIntegrationTest in 28.757 seconds (process running for 31.04)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\seol0\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.15\byte-buddy-agent-1.18.15.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-10-28T10:30:41.054+09:00 [WARN ] [aa63a89c-00dd-439c-8792-fdd3adf15fa8] [GlobalExceptionHandler.handleMethodArgumentNotValid] 입력 검증 오류 3건
+2026-10-28T10:30:41.131+09:00 [INFO ] [aa63a89c-00dd-439c-8792-fdd3adf15fa8] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/signup -> 400 (547ms)
+2026-10-28T10:30:41.793+09:00 [INFO ] [1de74d37-40e1-4f46-9c98-86c42f816cc6] [RequestLoggingFilter.doFilterInternal] GET /api/v1/auth/login-id-availability -> 200 (406ms)
+2026-10-28T10:30:42.255+09:00 [INFO ] [afceb2e6-433b-419c-b4c2-97a878cf43aa] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/signup -> 201 (459ms)
+2026-10-28T10:30:42.631+09:00 [INFO ] [bc9702a8-a5f3-4cb2-9599-79df91b77ddb] [RequestLoggingFilter.doFilterInternal] GET /api/v1/auth/login-id-availability -> 200 (9ms)
+2026-10-28T10:30:42.644+09:00 [WARN ] [d08b4392-3701-4f7a-a553-8004fd17a7b2] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4090: 이미 사용 중인 로그인 ID입니다.
+2026-10-28T10:30:42.648+09:00 [INFO ] [d08b4392-3701-4f7a-a553-8004fd17a7b2] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/signup -> 409 (14ms)
+2026-10-28T10:30:42.655+09:00 [INFO ] [4d99d989-3c04-4696-b1e2-55b33f0e4ec4] [RequestLoggingFilter.doFilterInternal] GET /api/v1/auth/me -> 401 (3ms)
+2026-10-28T10:30:42.659+09:00 [INFO ] [290fa3e9-031d-4a76-8e48-72297403571f] [RequestLoggingFilter.doFilterInternal] GET /api/v1/reservations -> 401 (1ms)
+2026-10-28T10:30:42.874+09:00 [WARN ] [6bab8930-7a4a-4c04-9ac4-88ae3caf5b05] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4000: 로그인 정보가 올바르지 않습니다.
+2026-10-28T10:30:42.877+09:00 [INFO ] [6bab8930-7a4a-4c04-9ac4-88ae3caf5b05] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 400 (215ms)
+2026-10-28T10:30:43.069+09:00 [INFO ] [709aec9f-79c4-484e-a170-4886985133a5] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (186ms)
+2026-10-28T10:30:43.108+09:00 [INFO ] [e5b689e9-6296-4128-97af-5e8f358d0982] [RequestLoggingFilter.doFilterInternal] GET /api/v1/auth/me -> 200 (35ms)
+2026-10-28T10:30:43.148+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.MeetingRoomApiIntegrationTest]: MeetingRoomApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:43.171+09:00 [INFO ] [] [SpringBootTestContextBootstrapper.getOrFindConfigurationClasses] Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.MeetingRoomApiIntegrationTest
+2026-10-28T10:30:43.175+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.MeetingRoomApiIntegrationTest]: MeetingRoomApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:43.176+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.IntegrationTestSupport]: IntegrationTestSupport does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:43.194+09:00 [INFO ] [] [SpringBootTestContextBootstrapper.getOrFindConfigurationClasses] Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.MeetingRoomApiIntegrationTest
+2026-10-28T10:30:43.645+09:00 [INFO ] [2718a51d-5220-4a77-9fec-be80747cbaad] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (154ms)
+2026-10-28T10:30:43.687+09:00 [INFO ] [d984061e-b699-41c6-b6ab-3656de6713b5] [RequestLoggingFilter.doFilterInternal] POST /api/v1/meeting-rooms -> 201 (39ms)
+2026-10-28T10:30:43.697+09:00 [INFO ] [5f85dbb5-2fc1-4928-89cb-5401f514fd14] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms/1 -> 200 (7ms)
+2026-10-28T10:30:43.715+09:00 [INFO ] [ec47a3a5-7d13-44c2-8a84-74c330054fab] [RequestLoggingFilter.doFilterInternal] PUT /api/v1/meeting-rooms/1 -> 200 (13ms)
+2026-10-28T10:30:43.769+09:00 [INFO ] [6c592a07-121f-4da6-8bd4-97bf356aa47a] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms -> 200 (51ms)
+2026-10-28T10:30:43.807+09:00 [WARN ] [5a538c21-84e5-4d37-8d95-aca205627b61] [GlobalExceptionHandler.handleMethodArgumentNotValid] 입력 검증 오류 1건
+2026-10-28T10:30:43.810+09:00 [INFO ] [5a538c21-84e5-4d37-8d95-aca205627b61] [RequestLoggingFilter.doFilterInternal] POST /api/v1/meeting-rooms -> 400 (9ms)
+2026-10-28T10:30:43.822+09:00 [WARN ] [264fa65d-c369-474d-a155-258209f71109] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4040: 존재하지 않는 회의실입니다.
+2026-10-28T10:30:43.823+09:00 [INFO ] [264fa65d-c369-474d-a155-258209f71109] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms/99999 -> 404 (9ms)
+2026-10-28T10:30:43.956+09:00 [INFO ] [8ff112db-501f-4eff-a4d7-6cba05e82bdc] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (130ms)
+2026-10-28T10:30:43.959+09:00 [WARN ] [cec59d98-9f5c-40e7-b865-99b5a137bfdd] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4030: 접근 권한이 없습니다.
+2026-10-28T10:30:43.961+09:00 [INFO ] [cec59d98-9f5c-40e7-b865-99b5a137bfdd] [RequestLoggingFilter.doFilterInternal] POST /api/v1/meeting-rooms -> 403 (4ms)
+2026-10-28T10:30:43.966+09:00 [WARN ] [6e0d860c-5f60-4899-91de-6a256605c191] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4030: 접근 권한이 없습니다.
+2026-10-28T10:30:43.969+09:00 [INFO ] [6e0d860c-5f60-4899-91de-6a256605c191] [RequestLoggingFilter.doFilterInternal] PUT /api/v1/meeting-rooms/1 -> 403 (6ms)
+2026-10-28T10:30:43.977+09:00 [WARN ] [61748399-e36c-42f4-a612-ea34ee9412ec] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4030: 접근 권한이 없습니다.
+2026-10-28T10:30:43.980+09:00 [INFO ] [61748399-e36c-42f4-a612-ea34ee9412ec] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms/1 -> 403 (7ms)
+2026-10-28T10:30:44.527+09:00 [INFO ] [d2c7687e-1a83-41ca-9d85-a16008977326] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (154ms)
+2026-10-28T10:30:44.542+09:00 [INFO ] [b587ff62-202e-4cf5-b968-9f9b468656f4] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms -> 200 (12ms)
+2026-10-28T10:30:44.768+09:00 [INFO ] [4aa36581-f0ff-468f-935d-d38e9f2e1b8e] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (199ms)
+2026-10-28T10:30:44.782+09:00 [INFO ] [ce5c8907-90d0-47d5-9148-facf02b57ec6] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms -> 200 (11ms)
+2026-10-28T10:30:44.787+09:00 [INFO ] [0dbb47b1-a691-4f83-baf5-7e0b49a530cb] [RequestLoggingFilter.doFilterInternal] GET /api/v1/meeting-rooms -> 401 (2ms)
+2026-10-28T10:30:45.161+09:00 [INFO ] [aa637a54-dda6-435a-b9a6-f7b58cd3276f] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (97ms)
+2026-10-28T10:30:45.174+09:00 [WARN ] [090d5e77-c592-49ac-b6d3-49220856fa72] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4030: 접근 권한이 없습니다.
+2026-10-28T10:30:45.175+09:00 [INFO ] [090d5e77-c592-49ac-b6d3-49220856fa72] [RequestLoggingFilter.doFilterInternal] GET /api/v1/admin/reservations -> 403 (12ms)
+2026-10-28T10:30:45.179+09:00 [INFO ] [8602ab16-fc5f-45d4-abc5-93f1c49e6425] [RequestLoggingFilter.doFilterInternal] GET /api/v1/admin/reservations -> 401 (1ms)
+2026-10-28T10:30:45.593+09:00 [INFO ] [edfdb87c-59d3-4aa9-84cb-8dbb84c02790] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (148ms)
+2026-10-28T10:30:45.672+09:00 [INFO ] [fff1f7c9-7ab9-487d-87fa-175b01aa40f0] [RequestLoggingFilter.doFilterInternal] GET /api/v1/admin/reservations -> 200 (77ms)
+2026-10-28T10:30:45.694+09:00 [INFO ] [7eed73dd-a85f-466a-90e0-59ac6abf11e7] [RequestLoggingFilter.doFilterInternal] GET /api/v1/admin/reservations -> 200 (18ms)
+2026-10-28T10:30:45.702+09:00 [WARN ] [2ce28abc-d472-467e-bc44-2547cb177184] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4000: 조회 기간의 시작일이 종료일보다 늦을 수 없습니다.
+2026-10-28T10:30:45.705+09:00 [INFO ] [2ce28abc-d472-467e-bc44-2547cb177184] [RequestLoggingFilter.doFilterInternal] GET /api/v1/admin/reservations -> 400 (7ms)
+2026-10-28T10:30:45.723+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.ReservationApiIntegrationTest]: ReservationApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:45.743+09:00 [INFO ] [] [SpringBootTestContextBootstrapper.getOrFindConfigurationClasses] Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.ReservationApiIntegrationTest
+2026-10-28T10:30:45.745+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.ReservationApiIntegrationTest]: ReservationApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:45.747+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.IntegrationTestSupport]: IntegrationTestSupport does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:45.759+09:00 [INFO ] [] [SpringBootTestContextBootstrapper.getOrFindConfigurationClasses] Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.ReservationApiIntegrationTest
+2026-10-28T10:30:46.233+09:00 [WARN ] [] [error.logExceptions] HHH000247: ErrorCode: 0, SQLState: 23P01
+2026-10-28T10:30:46.234+09:00 [WARN ] [] [error.logExceptions] ERROR: conflicting key value violates exclusion constraint "ex_reservation_overlap"
+  세부 정보: Key (meeting_room_id, tsrange(start_at, end_at))=(6, ["2030-01-02 09:30:00","2030-01-02 10:30:00")) conflicts with existing key (meeting_room_id, tsrange(start_at, end_at))=(6, ["2030-01-02 09:00:00","2030-01-02 10:00:00")).
+2026-10-28T10:30:46.825+09:00 [INFO ] [9757949d-ac80-4921-bce2-3a404443dcce] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (200ms)
+2026-10-28T10:30:46.897+09:00 [INFO ] [fd354290-b9dc-42e1-8eb2-6c945a9e755e] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 201 (68ms)
+2026-10-28T10:30:47.523+09:00 [INFO ] [4bc26aae-acc7-4f8b-9bac-f96c69c195be] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (177ms)
+2026-10-28T10:30:47.591+09:00 [INFO ] [337765f2-0009-46d4-bd43-84a717ae1a83] [RequestLoggingFilter.doFilterInternal] PATCH /api/v1/reservations/9/cancel -> 200 (50ms)
+2026-10-28T10:30:47.634+09:00 [INFO ] [d2f03083-37b6-4bbe-bbf9-2381abfdd417] [RequestLoggingFilter.doFilterInternal] GET /api/v1/reservations/mine -> 200 (40ms)
+2026-10-28T10:30:47.656+09:00 [INFO ] [199b970e-8b46-4051-923c-c29548164677] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 201 (18ms)
+2026-10-28T10:30:48.151+09:00 [INFO ] [35cdf310-484e-489c-baf4-188a2006926b] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (187ms)
+2026-10-28T10:30:48.174+09:00 [WARN ] [61cdf453-6584-4e58-88cd-b35f4324366f] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4090: 이미 예약된 시간입니다.
+2026-10-28T10:30:48.177+09:00 [INFO ] [61cdf453-6584-4e58-88cd-b35f4324366f] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 409 (14ms)
+2026-10-28T10:30:48.185+09:00 [WARN ] [b6fd984e-61be-45a8-9bb1-143928827bfd] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4220: 예약은 30분 단위로 최소 30분, 최대 4시간까지 가능합니다.
+2026-10-28T10:30:48.187+09:00 [INFO ] [b6fd984e-61be-45a8-9bb1-143928827bfd] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 422 (8ms)
+2026-10-28T10:30:48.564+09:00 [INFO ] [f9cc9742-39f5-440c-b431-f05628a8e7ce] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (97ms)
+2026-10-28T10:30:48.577+09:00 [WARN ] [ef485d9d-01af-46c8-b8c8-ce4526e6867b] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4030: 접근 권한이 없습니다.
+2026-10-28T10:30:48.579+09:00 [INFO ] [ef485d9d-01af-46c8-b8c8-ce4526e6867b] [RequestLoggingFilter.doFilterInternal] PATCH /api/v1/reservations/13/cancel -> 403 (11ms)
+2026-10-28T10:30:49.373+09:00 [INFO ] [25bd5553-0845-4f77-b32c-2a8d82b4f5f0] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (182ms)
+2026-10-28T10:30:49.387+09:00 [WARN ] [13942318-aceb-4e4e-b1ce-bdbe1394126a] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4030: 접근 권한이 없습니다.
+2026-10-28T10:30:49.390+09:00 [INFO ] [13942318-aceb-4e4e-b1ce-bdbe1394126a] [RequestLoggingFilter.doFilterInternal] PATCH /api/v1/reservations/14/cancel -> 403 (14ms)
+2026-10-28T10:30:49.567+09:00 [INFO ] [311b9a8d-b5f4-4b11-8892-7bf40e546c46] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (174ms)
+2026-10-28T10:30:49.580+09:00 [INFO ] [012068c7-6711-4e79-a19c-5b693bb94ec7] [RequestLoggingFilter.doFilterInternal] PATCH /api/v1/reservations/14/cancel -> 200 (10ms)
+2026-10-28T10:30:50.100+09:00 [INFO ] [1af92bf4-5bd5-475e-8cf8-c70222b21dfd] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (78ms)
+2026-10-28T10:30:50.122+09:00 [INFO ] [1378ba6d-f56f-4596-be66-586e73450f4d] [RequestLoggingFilter.doFilterInternal] GET /api/v1/reservations -> 200 (20ms)
+2026-10-28T10:30:50.138+09:00 [INFO ] [34920776-daa3-4d70-8c4d-9d9fe5ff4021] [RequestLoggingFilter.doFilterInternal] GET /api/v1/reservations -> 200 (12ms)
+2026-10-28T10:30:50.257+09:00 [INFO ] [64897d67-284c-46ee-a1d0-1c31e828b53c] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (117ms)
+2026-10-28T10:30:50.277+09:00 [INFO ] [9dc5650e-6368-4279-b88c-5ee1283820c3] [RequestLoggingFilter.doFilterInternal] GET /api/v1/reservations -> 200 (18ms)
+2026-10-28T10:30:50.294+09:00 [WARN ] [2f749b17-5e9b-4563-a215-77b660ac8949] [GlobalExceptionHandler.handleExceptionInternal] 요청 오류 400: MethodArgumentTypeMismatchException
+2026-10-28T10:30:50.297+09:00 [INFO ] [2f749b17-5e9b-4563-a215-77b660ac8949] [RequestLoggingFilter.doFilterInternal] GET /api/v1/reservations -> 400 (18ms)
+2026-10-28T10:30:50.775+09:00 [INFO ] [81ad1f29-0b4f-4bc4-ac08-af7acd1aff4f] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (147ms)
+2026-10-28T10:30:50.792+09:00 [WARN ] [d5fd066e-7ab3-48c7-8999-57946a288563] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4220: 시작된 예약은 취소할 수 없습니다.
+2026-10-28T10:30:50.794+09:00 [INFO ] [d5fd066e-7ab3-48c7-8999-57946a288563] [RequestLoggingFilter.doFilterInternal] PATCH /api/v1/reservations/19/cancel -> 422 (11ms)
+2026-10-28T10:30:50.804+09:00 [WARN ] [7b843b03-6bae-4365-a0d7-b1ca7564e843] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4040: 존재하지 않는 예약입니다.
+2026-10-28T10:30:50.805+09:00 [INFO ] [7b843b03-6bae-4365-a0d7-b1ca7564e843] [RequestLoggingFilter.doFilterInternal] PATCH /api/v1/reservations/99999/cancel -> 404 (8ms)
+2026-10-28T10:30:51.378+09:00 [INFO ] [e0865b52-8691-4fd4-ac98-85848f13460a] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (181ms)
+2026-10-28T10:30:51.389+09:00 [WARN ] [2747d949-7675-4a71-bebf-257e0eae0769] [GlobalExceptionHandler.handleExceptionInternal] 요청 오류 400: HttpMessageNotReadableException
+2026-10-28T10:30:51.393+09:00 [INFO ] [2747d949-7675-4a71-bebf-257e0eae0769] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 400 (12ms)
+2026-10-28T10:30:51.400+09:00 [WARN ] [24e3f5f4-a4bb-49b6-9597-d1d32264f01c] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4220: 예약은 30분 단위로 최소 30분, 최대 4시간까지 가능합니다.
+2026-10-28T10:30:51.402+09:00 [INFO ] [24e3f5f4-a4bb-49b6-9597-d1d32264f01c] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 422 (7ms)
+2026-10-28T10:30:51.413+09:00 [WARN ] [4db07380-6fb1-4d8e-aa61-c5977f5ebd13] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4040: 존재하지 않는 회의실입니다.
+2026-10-28T10:30:51.414+09:00 [INFO ] [4db07380-6fb1-4d8e-aa61-c5977f5ebd13] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 404 (9ms)
+2026-10-28T10:30:51.869+09:00 [INFO ] [6322f2ee-0a3e-484e-b30d-c6175e19e93f] [RequestLoggingFilter.doFilterInternal] POST /api/v1/auth/login -> 200 (129ms)
+2026-10-28T10:30:51.879+09:00 [WARN ] [8ab53184-eb2f-455e-9051-523645af4ff0] [GlobalExceptionHandler.handleBusiness] 업무 오류 ERR-4090: 이미 예약된 시간입니다.
+2026-10-28T10:30:51.880+09:00 [INFO ] [8ab53184-eb2f-455e-9051-523645af4ff0] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 409 (9ms)
+2026-10-28T10:30:51.895+09:00 [INFO ] [3e6c14f5-7e8c-4c67-853b-1188a01314de] [RequestLoggingFilter.doFilterInternal] POST /api/v1/reservations -> 201 (13ms)
+2026-10-28T10:30:51.904+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.ReservationRollbackIntegrationTest]: ReservationRollbackIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:51.918+09:00 [INFO ] [] [SpringBootTestContextBootstrapper.getOrFindConfigurationClasses] Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.ReservationRollbackIntegrationTest
+2026-10-28T10:30:51.920+09:00 [INFO ] [] [AnnotationConfigContextLoaderUtils.detectDefaultConfigurationClasses] Could not detect default configuration classes for test class [com.example.meetingroom.integration.ReservationRollbackIntegrationTest]: ReservationRollbackIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-28T10:30:51.928+09:00 [INFO ] [] [SpringBootTestContextBootstrapper.getOrFindConfigurationClasses] Found @SpringBootConfiguration com.example.meetingroom.MeetingroomApplication for test class com.example.meetingroom.integration.ReservationRollbackIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-28T10:30:51.985+09:00 [INFO ] [] [ReservationRollbackIntegrationTest.logStarting] Starting ReservationRollbackIntegrationTest using Java 25.0.4.1 with PID 29824 (started by seol0 in C:\dev\meeting-room-booking\backend)
+2026-10-28T10:30:51.987+09:00 [INFO ] [] [ReservationRollbackIntegrationTest.logStartupProfileInfo] No active profile set, falling back to 1 default profile: "default"
+2026-10-28T10:30:53.140+09:00 [INFO ] [] [RepositoryConfigurationDelegate.registerRepositoriesIn] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-28T10:30:53.251+09:00 [INFO ] [] [RepositoryConfigurationDelegate.registerRepositoriesIn] Finished Spring Data repository scanning in 105 ms. Found 3 JPA repository interfaces.
+2026-10-28T10:30:53.434+09:00 [INFO ] [] [postgres:17.tryStart] Creating container for image: postgres:17
+2026-10-28T10:30:53.593+09:00 [INFO ] [] [postgres:17.tryStart] Container postgres:17 is starting: 208f5630a783bc846227826f9777487153e02894b3e73f29994e73a8b90b4546
+2026-10-28T10:30:54.956+09:00 [INFO ] [] [postgres:17.tryStart] Container postgres:17 started in PT1.521089S
+2026-10-28T10:30:54.956+09:00 [INFO ] [] [postgres:17.containerIsStarted] Container is started (JDBC URL: jdbc:postgresql://localhost:9199/test?loggerLevel=OFF)
+2026-10-28T10:30:55.156+09:00 [INFO ] [] [FlywayExecutor.info] Database: jdbc:postgresql://localhost:9199/test?loggerLevel=OFF (PostgreSQL 17.11)
+2026-10-28T10:30:55.185+09:00 [INFO ] [] [JdbcTableSchemaHistory.info] Schema history table "public"."flyway_schema_history" does not exist yet
+2026-10-28T10:30:55.186+09:00 [INFO ] [] [DbValidate.info] Successfully validated 1 migration (execution time 00:00.005s)
+2026-10-28T10:30:55.198+09:00 [INFO ] [] [JdbcTableSchemaHistory.info] Creating Schema History table "public"."flyway_schema_history" ...
+2026-10-28T10:30:55.226+09:00 [INFO ] [] [DbMigrate.info] Current version of schema "public": << Empty Schema >>
+2026-10-28T10:30:55.236+09:00 [INFO ] [] [DbMigrate.info] Migrating schema "public" to version "1 - create initial tables"
+2026-10-28T10:30:55.279+09:00 [INFO ] [] [DbMigrate.info] Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.030s)
+2026-10-28T10:30:55.323+09:00 [INFO ] [] [jpa.logPersistenceUnitInformation] HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-28T10:30:55.374+09:00 [INFO ] [] [SpringPersistenceUnitInfo.addTransformer] No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-28T10:30:55.376+09:00 [INFO ] [] [HikariDataSource.getConnection] HikariPool-2 - Starting...
+2026-10-28T10:30:55.393+09:00 [INFO ] [] [HikariPool.checkFailFast] HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@4db4a67c
+2026-10-28T10:30:55.394+09:00 [INFO ] [] [HikariDataSource.getConnection] HikariPool-2 - Start completed.
+2026-10-28T10:30:55.403+09:00 [INFO ] [] [pooling.logConnectionInfo] HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:9199/test?loggerLevel=OFF]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.11
+	Default catalog/schema: test/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-28T10:30:55.573+09:00 [INFO ] [] [core.initiateService] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-28T10:30:55.593+09:00 [INFO ] [] [LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-28T10:30:56.156+09:00 [INFO ] [] [EndpointLinksResolver.<init>] Exposing 1 endpoint beneath base path '/actuator'
+2026-10-28T10:30:56.191+09:00 [INFO ] [] [ReservationRollbackIntegrationTest.logStarted] Started ReservationRollbackIntegrationTest in 4.255 seconds (process running for 47.771)
+2026-10-28T10:30:56.252+09:00 [WARN ] [] [error.logExceptions] HHH000247: ErrorCode: 0, SQLState: 23P01
+2026-10-28T10:30:56.252+09:00 [WARN ] [] [error.logExceptions] ERROR: conflicting key value violates exclusion constraint "ex_reservation_overlap"
+  세부 정보: Key (meeting_room_id, tsrange(start_at, end_at))=(1, ["2031-01-02 09:30:00","2031-01-02 10:30:00")) conflicts with existing key (meeting_room_id, tsrange(start_at, end_at))=(1, ["2031-01-02 09:00:00","2031-01-02 10:00:00")).
