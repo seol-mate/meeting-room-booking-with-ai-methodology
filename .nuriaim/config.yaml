@@ -141,7 +141,7 @@ vcs:
     # 상세 규칙: get_common_guide(guide_key="vcs") 참조
 
 options:
-  skip_stages: ["an-02", "an-06", "dn-02", "dn-03", "dn-11", "dn-13", "dn-22"] # 생략할 활동 코드 목록 (예: ["dn-11", "dn-32", "dn-33"])
+  skip_stages: ["an-02", "an-06", "im-02", "dn-02", "dn-03", "dn-11", "dn-13", "dn-22"] # 생략할 활동 코드 목록 (예: ["dn-11", "dn-32", "dn-33"])
   designer_provided:
     false # 디자이너(UA) 참여 여부 — true | false (기본값 false)
     # true:  4-DN-33 디자인 컨셉의 값을 디자이너의 Figma에서 **전사**한다.
